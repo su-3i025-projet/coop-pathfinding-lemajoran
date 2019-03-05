@@ -87,22 +87,23 @@ def main():
     # bon ici on fait juste plusieurs random walker pour exemple...
 
     posPlayers = initStates
-
+    map_width = map_height = 20
     path = []
 
+    # associate each start point to a goal point
     for i in range(3):
-        path.append(a_star(posPlayers[i], goalStates[i], wallStates))
+        path.append(a_star(posPlayers[i], goalStates[i], wallStates,
+        map_width, map_height))
 
-    print(path[2])
-    
+    # number max of iterations
     maxi_length = len(max(path, key=lambda x: len(x)))
 
     for i in range(maxi_length):
-
         for j in range(3):
-
+            # goal already reached
             if i >= len(path[j]):
                 continue
+            # update coordinates of the j player
             next_row, next_col = path[j][i]
             players[j].set_rowcol(next_row,next_col)
             game.mainiteration()
