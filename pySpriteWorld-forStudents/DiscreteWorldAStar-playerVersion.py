@@ -74,37 +74,27 @@ def main():
     goal =goalStates[0]
     #row2,col2 = (5,5)
 
-    res = a_star(start, goal, wallStates)
+    map_width = 20
+    map_height = 20
 
-    for i in res:
+    print(map_width, map_height)
 
-        next_row, next_col = i
+    # calcul the shortest path
+    a_start_path = a_star(start, goal, wallStates, map_width, map_height)
+
+    for coord in a_start_path:
+        next_row, next_col = coord
         player.set_rowcol(next_row,next_col)
+        print ("pos 1:",next_row,next_col)
         game.mainiteration()
-        # x_inc,y_inc = random.choice([(0,1),(0,-1),(1,0),(-1,0)])
-        # next_row = row+x_inc
-        # next_col = col+y_inc
-        # if ((next_row,next_col) not in wallStates) and next_row>=0 and next_row<=20 and next_col>=0 and next_col<=20:
-        #     player.set_rowcol(next_row,next_col)
-        #     print ("pos 1:",next_row,next_col)
-        #     game.mainiteration()
-        #
-        #     col=next_col
-        #     row=next_row
-        #
-        #
-        #
-        #
-        # # si on a  trouvé l'objet on le ramasse
-        # if (row,col)==goalStates[0]:
-        #     o = game.player.ramasse(game.layers)
-        #     game.mainiteration()
-        #     print ("Objet trouvé!", o)
-        #     break
-        '''
-        #x,y = game.player.get_pos()
 
-        '''
+    # the play has found the object
+    o = game.player.ramasse(game.layers)
+    game.mainiteration()
+    print ("Objet trouvé!", o)
+    '''
+        #x,y = game.player.get_pos()
+    '''
 
     pygame.quit()
 
