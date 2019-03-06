@@ -3,7 +3,7 @@
 # Nicolas, 2015-11-18
 
 from __future__ import absolute_import, print_function, unicode_literals
-from AStar_algorithm.AStarCooperative import AStarCooperativePath
+from AStar_algorithm.AStarPathSplicing import AStarPathSplicing
 from gameclass import Game,check_init_game_done
 from spritebuilder import SpriteBuilder
 from players import Player
@@ -37,6 +37,9 @@ def init(_boardname=None):
     game.mask.allow_overlaping_players = True
     #player = game.player
 
+def placer_fiole_alea():
+    pass
+
 def main():
 
     #for arg in sys.argv:
@@ -46,126 +49,126 @@ def main():
     print ("Iterations: ")
     print (iterations)
 
+    #--------------------------#
+    #----- Initialisation -----#
+    #--------------------------#
+
     init()
 
-
-    #-------------------------------
-    # Initialisation
-    #-------------------------------
-
+    # get player informations
     players = [o for o in game.layers['joueur']]
     nbPlayers = len(players)
     score = [0]*nbPlayers
 
+    # map size
+    map_width = map_height = 20
 
-    # on localise tous les états initiaux (loc du joueur)
+    # initial position of the players
     initStates = [o.get_rowcol() for o in game.layers['joueur']]
     print ("Init states:", initStates)
 
-    # on localise tous les objets ramassables
+    # initial goal of the players
     goalStates = [o.get_rowcol() for o in game.layers['ramassable']]
     print ("Goal states:", goalStates)
 
-    # on localise tous les murs
+    # get coordinates of every walls
     wallStates = [w.get_rowcol() for w in game.layers['obstacle']]
-    #print ("Wall states:", wallStates)
 
-    #-------------------------------
-    # Placement aleatoire des fioles
-    #-------------------------------
-
+    #--------------------------------#
+    #----- Potion init position -----#
+    #--------------------------------#
 
     # on donne a chaque joueur une fiole a ramasser
     # en essayant de faire correspondre les couleurs pour que ce soit plus simple à suivre
+    posPlayers = deepcopy(initStates)
+    goals = deepcopy(goalStates)
 
+    # create an A* algorithm to calcul the path for each player
+    # using slice splicing
+    a_star = AStarPathSplicing([(0,1),(0,-1),(1,0),(-1,0)])
 
-    #-------------------------------
-    # Boucle principale de déplacements
-    #-------------------------------
+    # memorize the current step of each player in their path
+    path_step = [0 for i in range(nbPlayers)]
 
-    # A star algorithm calcul the path for each player
+    # memorize path of each player
+    path_players = []
 
-    posPlayers = initStates
-    map_width = map_height = 20
-
-    a_star = AStarCooperativePath([(0,1),(0,-1),(1,0),(-1,0)])
-    path = []
-
-    # associate each start point to a goal point
-    for i in range(3):
-        path.append(a_star.calcul_path(posPlayers[i], goalStates[i], wallStates,
-        map_width, map_height, deepcopy(path)))
-
-    # memorize step current step of each player in their path
-    path_step = [0]*3
-    goals = [i for i in goalStates]
-    print(path)
+    # calculate the path for each player with A* from their start point
+    # to their goal point
+    for i in range(nbPlayers):
+        path_players.append(a_star.calcul_path(posPlayers[i], goals[i], wallStates,
+        map_width, map_height, deepcopy(path_players)))
 
     # no winner at the beginning
     winner = False
 
     while not winner:
 
-        for j in range(3):
+        for j in range(nbPlayers):
+
             # update coordinates of the j player
-            print("=>", j, path[j], path_step[j])
-            if path[j] == []: continue
-            next_row, next_col = path[j][path_step[j]]
-            players[j].set_rowcol(next_row,next_col)
+            new_row, new_col = path_players[j][path_step[j]]
+            players[j].set_rowcol(new_row,new_col)
+            # player has advanced of one step in its path
             path_step[j] += 1
 
-            col=next_col
-            row=next_row
-            posPlayers[j]=(row,col)
-
             # player reach the potion
-            if (row,col) == goals[j]:
+            if (new_row, new_col) in goalStates:
+
                 o = players[j].ramasse(game.layers)
                 print ("Objet trouvé par le joueur ", j)
-                goalStates.remove((row,col))
+                goalStates.remove((new_row, new_col))
+                # increase the score of player j
                 score[j]+=1
 
-                # first player with 3 point win
+                # first player with 100 point win
                 # end of the game
-                if score[j] > 100:
+                if score[j] > 99:
                     winner = True
                     break
 
-                # create new random coordinates for the object
-                x = random.randint(10,12)
-                y = random.randint(10,12)
+                # create new random coordinates for the new potion inside map
+                # coordnates
+                x = random.randint(0,map_width-1)
+                y = random.randint(0,map_height-1)
+                # if the potion appears in the coordinates of a wall
+                # generate a new position for it
                 while (x,y) in wallStates:
-                    x = random.randint(10,12)
-                    y = random.randint(10,12)
+                    x = random.randint(0,map_width-1)
+                    y = random.randint(0,map_height-1)
+
+                # apply new coordinates to the potion
                 o.set_rowcol(x,y)
-                # on ajoute ce nouveau goalState
+                # add the new goalstate
                 goalStates.append((x,y))
                 game.layers['ramassable'].add(o)
 
-                # create new path from the current position to the
-                # new pos of the object
-                temp_path = deepcopy(path)
-                if j == 0:
-                    temp_path[1] = temp_path[1][path_step[1]:]
-                    temp_path[2] = temp_path[2][path_step[2]:]
-                elif j == 1:
-                    temp_path[0] = temp_path[0][path_step[0]:]
-                    temp_path[2] = temp_path[2][path_step[2]:]
-                else:
-                    temp_path[0] = temp_path[0][path_step[0]:]
-                    temp_path[1] = temp_path[1][path_step[1]:]
+                # create a new path from the current position to the
+                # new position of the object
+
+                # copy the path of every player
+                temp_path = deepcopy(path_players)
+
+                # keep only the part of the path that hasn't been executed yet
+                temp_path = [temp_path[k][path_step[k]:] for k in range(3)]
+                # remove the path of the current player
                 temp_path.pop(j)
-                path_step[j] = 0
-                path[j] = a_star.calcul_path((row, col), (x, y), wallStates,
+                # create a new path in function of the path of the other players
+                path_players[j] = a_star.calcul_path((new_row, new_col), (x, y), wallStates,
                 map_width, map_height, temp_path)
-                if path[j] == []:
-                    path[j] = [(x, y)]
-                if path[j] is False:
-                    path[j] = [(x, y)]
-                goals[j] = x, y
-                print("->",j, path[j], path_step[j], goals)
-                # new path, reinitialize step
+                # new path, no step executed yet
+                path_step[j] = 0
+
+                #start coordiantes and goal coordinates are the same
+                if path_players[j] == []:
+                    path_players[j] = [(x, y)]
+
+                # no valid path from start coordinates to the goal coordinates
+                if path_players[j] is False:
+                    path_players[j] = [(x, y)]
+
         game.mainiteration()
+
     print ("scores:", score)
     pygame.quit()
 
