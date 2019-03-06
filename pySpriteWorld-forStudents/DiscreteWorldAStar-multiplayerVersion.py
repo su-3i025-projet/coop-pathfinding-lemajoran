@@ -12,13 +12,13 @@ from itertools import chain
 import pygame
 import glo
 
-import random 
+import random
 import numpy as np
 import sys
 
 
 
-    
+
 # ---- ---- ---- ---- ---- ----
 # ---- Main                ----
 # ---- ---- ---- ---- ---- ----
@@ -36,7 +36,7 @@ def init(_boardname=None):
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
-    
+
 def main():
 
     #for arg in sys.argv:
@@ -47,37 +47,37 @@ def main():
     print (iterations)
 
     init()
-    
-    
-    
 
-    
+
+
+
+
     #-------------------------------
     # Initialisation
     #-------------------------------
-       
+
     players = [o for o in game.layers['joueur']]
     nbPlayers = len(players)
     score = [0]*nbPlayers
-    
-    
+
+
     # on localise tous les états initiaux (loc du joueur)
     initStates = [o.get_rowcol() for o in game.layers['joueur']]
     print ("Init states:", initStates)
-    
-    
+
+
     # on localise tous les objets ramassables
     goalStates = [o.get_rowcol() for o in game.layers['ramassable']]
     print ("Goal states:", goalStates)
-        
+
     # on localise tous les murs
     wallStates = [w.get_rowcol() for w in game.layers['obstacle']]
     #print ("Wall states:", wallStates)
-    
+
     #-------------------------------
-    # Placement aleatoire des fioles de couleur 
+    # Placement aleatoire des fioles de couleur
     #-------------------------------
-    
+
     for o in game.layers['ramassable']: # les rouges puis jaunes puis bleues
     # et on met la fiole qqpart au hasard
         x = random.randint(1,19)
@@ -87,24 +87,24 @@ def main():
             y = random.randint(1,19)
         o.set_rowcol(x,y)
         game.layers['ramassable'].add(o)
-        game.mainiteration()                
+        game.mainiteration()
 
     print(game.layers['ramassable'])
 
 
-    
-    
+
+
     #-------------------------------
-    # Boucle principale de déplacements 
+    # Boucle principale de déplacements
     #-------------------------------
-    
-        
+
+
     # bon ici on fait juste plusieurs random walker pour exemple...
-    
+
     posPlayers = initStates
 
     for i in range(iterations):
-        
+
         for j in range(nbPlayers): # on fait bouger chaque joueur séquentiellement
             row,col = posPlayers[j]
 
@@ -116,14 +116,14 @@ def main():
                 players[j].set_rowcol(next_row,next_col)
                 print ("pos :", j, next_row,next_col)
                 game.mainiteration()
-    
+
                 col=next_col
                 row=next_row
                 posPlayers[j]=(row,col)
-            
-      
-        
-            
+
+
+
+
             # si on a  trouvé un objet on le ramasse
             if (row,col) in goalStates:
                 o = players[j].ramasse(game.layers)
@@ -131,8 +131,8 @@ def main():
                 print ("Objet trouvé par le joueur ", j)
                 goalStates.remove((row,col)) # on enlève ce goalState de la liste
                 score[j]+=1
-                
-        
+
+
                 # et on remet un même objet à un autre endroit
                 x = random.randint(1,19)
                 y = random.randint(1,19)
@@ -142,20 +142,17 @@ def main():
                 o.set_rowcol(x,y)
                 goalStates.append((x,y)) # on ajoute ce nouveau goalState
                 game.layers['ramassable'].add(o)
-                game.mainiteration()                
-                
+                game.mainiteration()
+
                 break
-            
-    
+
+
     print ("scores:", score)
     pygame.quit()
-    
-        
-    
-   
+
+
+
+
 
 if __name__ == '__main__':
     main()
-    
-
-

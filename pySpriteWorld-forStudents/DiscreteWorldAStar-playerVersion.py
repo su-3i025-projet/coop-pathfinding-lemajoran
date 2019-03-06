@@ -3,6 +3,7 @@
 # Nicolas, 2015-11-18
 
 from __future__ import absolute_import, print_function, unicode_literals
+from AStar_algorithm.AStarSimplePath import AStarSimplePath
 from gameclass import Game,check_init_game_done
 from spritebuilder import SpriteBuilder
 from players import Player
@@ -15,8 +16,6 @@ import glo
 import random
 import numpy as np
 import sys
-
-from AStarAlgorithm import a_star
 # ---- ---- ---- ---- ---- ----
 # ---- Misc                ----
 # ---- ---- ---- ---- ---- ----
@@ -80,9 +79,10 @@ def main():
     print(map_width, map_height)
 
     # calcul the shortest path
-    a_start_path = a_star(start, goal, wallStates, map_width, map_height)
+    a_star = SimpleAStarPath([(0,1),(0,-1),(1,0),(-1,0)])
+    path = a_star.calcul_path(start, goal, wallStates, map_width, map_height)
 
-    for coord in a_start_path:
+    for coord in path:
         next_row, next_col = coord
         player.set_rowcol(next_row,next_col)
         print ("pos 1:",next_row,next_col)

@@ -3,12 +3,14 @@
 # Nicolas, 2015-11-18
 
 from __future__ import absolute_import, print_function, unicode_literals
+from AStar_algorithm.AStarCooperative import AStarCooperativePath
 from gameclass import Game,check_init_game_done
 from spritebuilder import SpriteBuilder
 from players import Player
 from sprite import MovingSprite
 from ontology import Ontology
 from itertools import chain
+from copy import deepcopy
 import pygame
 import glo
 
@@ -16,8 +18,6 @@ import random
 import numpy as np
 import sys
 
-
-from AStarAlgorithm import a_star
 
 # ---- ---- ---- ---- ---- ----
 # ---- Main                ----
@@ -83,75 +83,89 @@ def main():
     # Boucle principale de déplacements
     #-------------------------------
 
-
-    # bon ici on fait juste plusieurs random walker pour exemple...
+    # A star algorithm calcul the path for each player
 
     posPlayers = initStates
     map_width = map_height = 20
+
+    a_star = AStarCooperativePath([(0,1),(0,-1),(1,0),(-1,0)])
     path = []
 
     # associate each start point to a goal point
     for i in range(3):
-        path.append(a_star(posPlayers[i], goalStates[i], wallStates,
-        map_width, map_height))
+        path.append(a_star.calcul_path(posPlayers[i], goalStates[i], wallStates,
+        map_width, map_height, deepcopy(path)))
 
-    # number max of iterations
-    maxi_length = len(max(path, key=lambda x: len(x)))
+    # memorize step current step of each player in their path
+    path_step = [0]*3
+    goals = [i for i in goalStates]
+    print(path)
 
-    for i in range(maxi_length):
+    # no winner at the beginning
+    winner = False
+
+    while not winner:
+
         for j in range(3):
-            # goal already reached
-            if i >= len(path[j]):
-                continue
             # update coordinates of the j player
-            next_row, next_col = path[j][i]
+            print("=>", j, path[j], path_step[j])
+            if path[j] == []: continue
+            next_row, next_col = path[j][path_step[j]]
             players[j].set_rowcol(next_row,next_col)
-            game.mainiteration()
+            path_step[j] += 1
 
-    # for i in range(iterations):
-    #
-    #     for j in range(nbPlayers): # on fait bouger chaque joueur séquentiellement
-    #         row,col = posPlayers[j]
-    #
-    #         x_inc,y_inc = random.choice([(0,1),(0,-1),(1,0),(-1,0)])
-    #         next_row = row+x_inc
-    #         next_col = col+y_inc
-    #         # and ((next_row,next_col) not in posPlayers)
-    #         if ((next_row,next_col) not in wallStates) and next_row>=0 and next_row<=19 and next_col>=0 and next_col<=19:
-    #             players[j].set_rowcol(next_row,next_col)
-    #             print ("pos :", j, next_row,next_col)
-    #             game.mainiteration()
-    #
-    #             col=next_col
-    #             row=next_row
-    #             posPlayers[j]=(row,col)
-    #
-    #
-    #
-    #
-    #         # si on a  trouvé un objet on le ramasse
-    #         if (row,col) in goalStates:
-    #             o = players[j].ramasse(game.layers)
-    #             game.mainiteration()
-    #             print ("Objet trouvé par le joueur ", j)
-    #             goalStates.remove((row,col)) # on enlève ce goalState de la liste
-    #             score[j]+=1
-    #
-    #
-    #             # et on remet un même objet à un autre endroit
-    #             x = random.randint(1,19)
-    #             y = random.randint(1,19)
-    #             while (x,y) in wallStates:
-    #                 x = random.randint(1,19)
-    #                 y = random.randint(1,19)
-    #             o.set_rowcol(x,y)
-    #             goalStates.append((x,y)) # on ajoute ce nouveau goalState
-    #             game.layers['ramassable'].add(o)
-    #             game.mainiteration()
-    #
-    #             break
-    #
+            col=next_col
+            row=next_row
+            posPlayers[j]=(row,col)
 
+            # player reach the potion
+            if (row,col) == goals[j]:
+                o = players[j].ramasse(game.layers)
+                print ("Objet trouvé par le joueur ", j)
+                goalStates.remove((row,col))
+                score[j]+=1
+
+                # first player with 3 point win
+                # end of the game
+                if score[j] > 100:
+                    winner = True
+                    break
+
+                # create new random coordinates for the object
+                x = random.randint(10,12)
+                y = random.randint(10,12)
+                while (x,y) in wallStates:
+                    x = random.randint(10,12)
+                    y = random.randint(10,12)
+                o.set_rowcol(x,y)
+                # on ajoute ce nouveau goalState
+                goalStates.append((x,y))
+                game.layers['ramassable'].add(o)
+
+                # create new path from the current position to the
+                # new pos of the object
+                temp_path = deepcopy(path)
+                if j == 0:
+                    temp_path[1] = temp_path[1][path_step[1]:]
+                    temp_path[2] = temp_path[2][path_step[2]:]
+                elif j == 1:
+                    temp_path[0] = temp_path[0][path_step[0]:]
+                    temp_path[2] = temp_path[2][path_step[2]:]
+                else:
+                    temp_path[0] = temp_path[0][path_step[0]:]
+                    temp_path[1] = temp_path[1][path_step[1]:]
+                temp_path.pop(j)
+                path_step[j] = 0
+                path[j] = a_star.calcul_path((row, col), (x, y), wallStates,
+                map_width, map_height, temp_path)
+                if path[j] == []:
+                    path[j] = [(x, y)]
+                if path[j] is False:
+                    path[j] = [(x, y)]
+                goals[j] = x, y
+                print("->",j, path[j], path_step[j], goals)
+                # new path, reinitialize step
+        game.mainiteration()
     print ("scores:", score)
     pygame.quit()
 
