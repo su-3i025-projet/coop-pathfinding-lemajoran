@@ -1,4 +1,4 @@
-#cython: boundscheck=False, nonecheck=False,wraparound=False,initializedcheck=False,cdivision=True
+# cython: boundscheck=False, nonecheck=False,wraparound=False,initializedcheck=False,cdivision=True
 #
 # Note:
 # Cython n'est pas indispensable pour ce code.
@@ -11,7 +11,8 @@
 # avec Cython actif,     un appel a rayon prend: 2.24 microsec per loop
 # avec seulement Python, un appel a rayon prend: 188 microsec per loop
 
-from math import pi,cos,sin
+from math import cos, pi, sin
+
 import numpy as np
 import pygame
 
@@ -24,7 +25,7 @@ except:
 
 
 # bresenham algorithm cropped in the window (0,0,w,h)
-def rayon(m,x,y,angle,w,h):
+def rayon(m, x, y, angle, w, h):
     """
         cette fonction lance un rayon, avec l'algo de bresenham
         le rayon part de (x,y) et suit un angle donne jusqu'au bord
@@ -32,28 +33,33 @@ def rayon(m,x,y,angle,w,h):
         la fonction renvoie les coordonnees du premier point du masque qui soit a 1.
     """
     _cython_compiled = cython_compiled
-    if _cython_compiled:    bm = cyGetBitmask(m)
+    if _cython_compiled:
+        bm = cyGetBitmask(m)
 
-    x2 = x + int( cos(angle)*(w+h) )
-    y2 = y + int( sin(angle)*(w+h) )
-    x,y = int(x),int(y)
-    w,h = int(w),int(h)
+    x2 = x + int(cos(angle) * (w + h))
+    y2 = y + int(sin(angle) * (w + h))
+    x, y = int(x), int(y)
+    w, h = int(w), int(h)
 
     steep = 0
     dx = abs(x2 - x)
     dy = abs(y2 - y)
-    if (x2 - x) > 0: sx = 1
-    else: sx = -1
+    if (x2 - x) > 0:
+        sx = 1
+    else:
+        sx = -1
 
-    if (y2 - y) > 0: sy = 1
-    else: sy = -1
+    if (y2 - y) > 0:
+        sy = 1
+    else:
+        sy = -1
 
     if dy > dx:
         steep = 1
-        x,y = y,x
-        dx,dy = dy,dx
-        sx,sy = sy,sx
-        w,h   = h,w
+        x, y = y, x
+        dx, dy = dy, dx
+        sx, sy = sy, sx
+        w, h = h, w
 
     d = (2 * dy) - dx
 
@@ -62,21 +68,21 @@ def rayon(m,x,y,angle,w,h):
     # boucle principale de l'algo de Bresenham
     while y >= 0 and 0 <= x < w and y < h and i <= dx:
         if steep:
-            #print y,x
+            # print y,x
             if _cython_compiled:
-                if cyBitmaskGetbit(bm,y,x):
-                    return (y,x)
+                if cyBitmaskGetbit(bm, y, x):
+                    return (y, x)
             else:
-                if m.get_at((y,x)):
-                    return (y,x)
+                if m.get_at((y, x)):
+                    return (y, x)
         else:
-            #print x,y
+            # print x,y
             if _cython_compiled:
-                if cyBitmaskGetbit(bm,x,y):
-                    return (x,y)
+                if cyBitmaskGetbit(bm, x, y):
+                    return (x, y)
             else:
-                if m.get_at((x,y)):
-                    return (x,y)
+                if m.get_at((x, y)):
+                    return (x, y)
 
         while d >= 0:
             y += sy
@@ -85,12 +91,7 @@ def rayon(m,x,y,angle,w,h):
         x += sx
         d += 2 * dy
         i += 1
-    return (y,x) if steep else (x,y) # or None ?
-
-
-
-
-
+    return (y, x) if steep else (x, y)  # or None ?
 
 
 # Unit Test
@@ -105,16 +106,17 @@ def test_rayon():
 
     im = pygame.image.load('Unused/DataUnused/Square2.png')
     m = pygame.mask.from_surface(im)
-    w,h = im.get_width(),im.get_height()
-    print ("Unit test launched...")
+    w, h = im.get_width(), im.get_height()
+    print("Unit test launched...")
 
-    T = np.zeros((w,h))
-    for angle in np.linspace(0,2*pi-0.1,50):
-        T[ rayon(m,w/2,h/2,angle,w,h) ] = 1
+    T = np.zeros((w, h))
+    for angle in np.linspace(0, 2 * pi - 0.1, 50):
+        T[rayon(m, w / 2, h / 2, angle, w, h)] = 1
 
-    plt.imshow(T,cmap='gist_ncar')
+    plt.imshow(T, cmap='gist_ncar')
     plt.savefig('carre.png')
-    print ("image file carre.png should have a dotted square")
+    print("image file carre.png should have a dotted square")
+
 
 if __name__ == '__main__':
     test_rayon()

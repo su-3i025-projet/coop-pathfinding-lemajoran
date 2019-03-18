@@ -1,10 +1,11 @@
-import numpy as np
 import csv
-import sys
-#import cytoolz # pip install cytoolz
-from collections import defaultdict
-import os
 import itertools
+import os
+import sys
+# import cytoolz # pip install cytoolz
+from collections import defaultdict
+
+import numpy as np
 
 noms_d_affreux = """
 Nuzak,Lystis, Mefeero, Sazai, Ross, Azok,
@@ -21,11 +22,11 @@ Cyprian,Danorum,Logia,Malleus,Neaniskos,Papyri,Utpala
 
 class Ontology:
 
-    def __init__(self,pairs=True,filename='tiny_spritesheet_ontology.csv'):
-        self.onto = self.construit_ontologie(pairs,filename)
+    def __init__(self, pairs=True, filename='tiny_spritesheet_ontology.csv'):
+        self.onto = self.construit_ontologie(pairs, filename)
         self.cate = self.construit_categories()
 
-    def names(self,sprt):
+    def names(self, sprt):
         if sprt is None:
             return None
         try:
@@ -38,14 +39,14 @@ class Ontology:
                 return ['']
                 #raise "erreur.. le sprite n'a pas de nom"
 
-    def firstname(self,sprt):
-        return None if sprt==None else self.names(sprt)[0]
+    def firstname(self, sprt):
+        return None if sprt == None else self.names(sprt)[0]
 
-    def secondname(self,sprt):
-        return None if sprt==None else self.names(sprt)[1]
+    def secondname(self, sprt):
+        return None if sprt == None else self.names(sprt)[1]
 
     @staticmethod
-    def construit_ontologie(pairs,filename):
+    def construit_ontologie(pairs, filename):
         '''
             Construit un dictionnaire (de type cles=pairs d entier ou juste entier, valeur=ensemble de strings)
             Ce dictionnaire decrit ce qu'il y a dans les tiles, en reprenant l information d un fichier csv
@@ -67,26 +68,23 @@ class Ontology:
         ontology = {}
         f = open(dirname + "/" + filename, 'r')
         reader = csv.reader(f)
-        for i,row in enumerate(reader):
-            for j,s in enumerate(row):
+        for i, row in enumerate(reader):
+            for j, s in enumerate(row):
                 l = s.lower().split(' ')
                 summary = '-'.join(l)
                 if summary not in l:
                     l.append(summary)
-                ontology[(i,j) if pairs else i*len(row)+j] = l
+                ontology[(i, j) if pairs else i * len(row) + j] = l
         f.close()
 
         # les guerriers sont de la case (16,6) jusqu'a (21,12)
         noms_guerriers = [st.strip() for st in noms_d_affreux.split(',')]
         idx_nom = itertools.count()
-        for i in range(16,22):
-            for j in range(6,13):
-                ontology[(i,j)] = [noms_guerriers[ next(idx_nom) ],'guerrier']
+        for i in range(16, 22):
+            for j in range(6, 13):
+                ontology[(i, j)] = [noms_guerriers[next(idx_nom)], 'guerrier']
 
         return ontology
-
-
-
 
     def construit_categories(self):
         '''
@@ -101,7 +99,7 @@ class Ontology:
         '''
         cat = defaultdict(set)
 
-        for idx,descr in self.onto.items():
+        for idx, descr in self.onto.items():
             for nom in descr:
-                cat[nom].add( idx )
+                cat[nom].add(idx)
         return cat

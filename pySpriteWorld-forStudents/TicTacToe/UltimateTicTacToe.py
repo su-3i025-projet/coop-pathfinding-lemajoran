@@ -3,6 +3,14 @@
 # Nicolas, 2015-11-18
 
 from __future__ import absolute_import, print_function, unicode_literals
+
+import sys
+
+sys.path.append('../Utils')
+
+import random
+import numpy as np
+
 from gameclass import Game,check_init_game_done
 from spritebuilder import SpriteBuilder
 from players import Player
@@ -12,13 +20,8 @@ from itertools import chain
 import pygame
 import glo
 
-import random 
-import numpy as np
-import sys
 
 
-
-    
 # ---- ---- ---- ---- ---- ----
 # ---- Main                ----
 # ---- ---- ---- ---- ---- ----
@@ -36,7 +39,7 @@ def init(_boardname=None):
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
-    
+
 def main():
 
     #for arg in sys.argv:
@@ -47,43 +50,43 @@ def main():
     print (iterations)
 
     init()
-    
-    
-    
 
-    
+
+
+
+
     #-------------------------------
     # Initialisation
     #-------------------------------
-       
+
     players = [o for o in game.layers['joueur']]
     nbPlayers = len(players)
     #score = [0]*nbPlayers
     fioles = {} # dictionnaire (x,y)->couleur pour les fioles
-    
-    
+
+
     # on localise tous les états initiaux (loc du joueur)
     initStates = [o.get_rowcol() for o in game.layers['joueur']]
     print ("Init states:", initStates)
-    
-    
+
+
     # on localise tous les objets ramassables
     #goalStates = [o.get_rowcol() for o in game.layers['ramassable']]
     #print ("Goal states:", goalStates)
-        
+
     # on localise tous les murs
     wallStates = [w.get_rowcol() for w in game.layers['obstacle']]
     tictactoeStates = [(x,y) for x in range(3,16) for y in range(3,16)]
     #print ("Wall states:", wallStates)
-    
+
     #-------------------------------
-    # Placement aleatoire des fioles de couleur 
+    # Placement aleatoire des fioles de couleur
     #-------------------------------
-    
+
     for o in game.layers['ramassable']: # on considère chaque fiole
-        
+
         #on détermine la couleur
-    
+
         if o.tileid == (19,0): # tileid donne la coordonnee dans la fiche de sprites
             couleur = 'r'
         elif o.tileid == (19,1):
@@ -100,28 +103,28 @@ def main():
             x = random.randint(1,19)
             y = random.randint(1,19)
         o.set_rowcol(x,y)
-        # on ajoute cette fiole 
+        # on ajoute cette fiole
         fioles[(x,y)]=couleur
 
         game.layers['ramassable'].add(o)
-        game.mainiteration()                
+        game.mainiteration()
 
     print("Les ", len(fioles), " fioles ont été placées aux endroits suivants: \n", fioles)
 
 
-    
-    
+
+
     #-------------------------------
-    # Boucle principale de déplacements 
+    # Boucle principale de déplacements
     #-------------------------------
-    
-        
+
+
     # bon ici on fait juste plusieurs random walker pour exemple...
-    
+
     posPlayers = initStates
 
     for i in range(iterations):
-        
+
         for j in range(nbPlayers): # on fait bouger chaque joueur séquentiellement
             row,col = posPlayers[j]
 
@@ -133,35 +136,32 @@ def main():
                 players[j].set_rowcol(next_row,next_col)
                 print ("pos :", j, next_row,next_col)
                 game.mainiteration()
-    
+
                 col=next_col
                 row=next_row
                 posPlayers[j]=(row,col)
-            
-      
-        
-            
+
+
+
+
             # si on trouve un objet on le ramasse
             if (row,col) in fioles:
                 o = players[j].ramasse(game.layers)
                 game.mainiteration()
                 print ("Objet de couleur ", fioles[(row,col)], " trouvé par le joueur ", j)
                 fioles.pop((row,col))   # on enlève cette fiole de la liste
-                
-                 
-                
+
+
+
                 #break
-            
-    
+
+
     print (fioles)
     pygame.quit()
-    
-        
-    
-   
+
+
+
+
 
 if __name__ == '__main__':
     main()
-    
-
-

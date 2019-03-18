@@ -1,6 +1,7 @@
 import heapq
+import AStarSimplePath as assp
 
-class AStarSimplePath:
+class AStar3dPath(assp.AStarSimplePath):
 
     def __init__(self, neighbors):
         """
@@ -20,63 +21,9 @@ class AStarSimplePath:
             calul the shortest between two coordinates
         """
         self.neighbors = neighbors
+        self.reservation_table = {}
 
-    def outside_the_map(self, size, coord):
-        """
-            -> Check if a point is outside of the map surface
-
-            ----------
-            parameters
-            ----------
-            : width (int): width of the map
-            : height (int): height of the map
-            : coord (int, int): coordinates of the point
-            ----------
-              return
-            ----------
-            : boolean: True if the point is inside the map else False
-        """
-        x, y = coord
-        # in the map, check the coordinates with the size of the map
-        return x >= size or x < 0 or y >= size or y < 0
-
-    @staticmethod
-    def manhattan_distance(coord1, coord2):
-        """
-            -> Calcul the distance of manhattan between two coordinates
-
-            ----------
-            parameters
-            ----------
-            : coord1 (int, int): coordinates
-            : coord1 (int, int): coordinates
-            ----------
-              return
-            ----------
-            : int: manhattan's distance between a and b
-        """
-        x1, y1 = coord1
-        x2, y2 = coord2
-        return abs(x2 - x1) + abs(y2 - y1)
-
-    @classmethod
-    def heuristic(cls, coord1, coord2):
-        """
-            -> Calcul the heuristic between two coordinates
-
-            ----------
-            parameters
-            ----------
-            : coord1 (int, int): coordinates
-            : coord1 (int, int): coordinates
-            ----------
-              return
-            ----------
-            : int: manhattan's distance between a and b
-        """
-        return AStarSimplePath.manhattan_distance(coord1, coord2)
-
-    def calcul_path(self, start, goal, obstacles, size):
+    def calcul_path(self, start, goal, obstacles, size, time):
         """
             -> Calcul the shortest path from a start point to a goal point
 
@@ -95,11 +42,12 @@ class AStarSimplePath:
             -> else:
             : False: no path exists
         """
+        print("time", time)
         # init the parameter
         closed_nodes = set()
         came_from = {}
         gscore = {start: 0}
-        fscore = {start: AStarSimplePath.heuristic(start, goal)}
+        fscore = {start: AStar3dPath.heuristic(start, goal)}
         open_nodes = []
 
         # start with the exploration of the start node
@@ -127,19 +75,30 @@ class AStarSimplePath:
                 # skip the coordinates if its an obstacle or outisde the map
                 if neighbor in obstacles or self.outside_the_map(size, neighbor):
                     continue
-                # calcul new score
+                # calcul new g score
                 tentative_g_score = gscore[current] + \
-                    AStarSimplePath.heuristic(current, neighbor)
+                    AStar3dPath.heuristic(current, neighbor)
+
                 if neighbor in closed_nodes and tentative_g_score >= gscore.get(neighbor, 0):
                     continue
+
+                row, col = neighbor
+
+                if (row, col, time+tentative_g_score) in self.reservation_table:
+                    print(row, col, time+tentative_g_score)
+                    continue
+
                 # node not visited yet or better score than before for these coordinates
                 # update the variables
                 if tentative_g_score < gscore.get(neighbor, 0) or\
                         neighbor not in [i[1]for i in open_nodes]:
+                    print("=>", row, col, time+gscore[current])
+                    self.reservation_table[(row, col, time+gscore[current])] = True
+                    self.reservation_table[(row, col, time+tentative_g_score)] = True
                     came_from[neighbor] = current
                     gscore[neighbor] = tentative_g_score
                     fscore[neighbor] = tentative_g_score + \
-                        AStarSimplePath.heuristic(neighbor, goal)
+                        AStar3dPath.heuristic(neighbor, goal)
                     # continue to explore this path
                     heapq.heappush(open_nodes, (fscore[neighbor], neighbor))
         # no path found
