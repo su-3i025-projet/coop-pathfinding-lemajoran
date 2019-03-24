@@ -2,39 +2,43 @@ import heapq
 
 class AStarSimplePath:
 
-    def __init__(self, neighbors):
-        """
-            Class representing the A* algorithm without modification
+    """
+        Class representing the A* algorithm using manhattan distance as
+        heuristic
 
-            ----------
-            attributes
-            ----------
-            : neighbors (list): list of the possible moves
-            ----------
-              methods
-            ----------
-            : outside_the_map(int, int, (int, int)): check if the coordinates
-            are outisde of the map
-            : heuristic (int, int): calcul heuristic between two coordinates
-            : calcul_path ((int, int), (int, int), list, int, int):
-            calul the shortest between two coordinates
-        """
-        self.neighbors = neighbors
+        Attributes
+        ----------
+        neighbors : *args
+            list of the possible moves
 
-    def outside_the_map(self, size, coord):
-        """
-            -> Check if a point is outside of the map surface
+        Methods
+        -------
+        outside_the_map(size, coord)
+            check if coord are outside of the map
+        heuristic (coord1, coord2)
+            calcul heuristic between two coordinates
+        calcul_path(start, goal, obstacles, size)
+            calcul the shortest path between two coordinates
+    """
 
+    NEIGHBORS= [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+    @classmethod
+    def outside_the_map(cls, size, coord):
+        """
+            Check if a point is outside of the map surface
+
+            Parameters
             ----------
-            parameters
-            ----------
-            : width (int): width of the map
-            : height (int): height of the map
-            : coord (int, int): coordinates of the point
-            ----------
-              return
-            ----------
-            : boolean: True if the point is inside the map else False
+            size : int
+                width of the map
+            coord : tuple of int
+                coordinates of the point
+
+            Returns
+            -------
+            bool
+                True if the point is outside of the map otherwise False
         """
         x, y = coord
         # in the map, check the coordinates with the size of the map
@@ -43,17 +47,19 @@ class AStarSimplePath:
     @staticmethod
     def manhattan_distance(coord1, coord2):
         """
-            -> Calcul the distance of manhattan between two coordinates
+            Calcul the distance of manhattan between two coordinates
 
+            Parameters
             ----------
-            parameters
+            coord1 : tuple of int
+                coordinates of the first point
+            coord2 : tuple of int
+                coordinates of the second point
+
+            Returns
             ----------
-            : coord1 (int, int): coordinates
-            : coord1 (int, int): coordinates
-            ----------
-              return
-            ----------
-            : int: manhattan's distance between a and b
+            int
+                manhattan's distance between a and b
         """
         x1, y1 = coord1
         x2, y2 = coord2
@@ -62,38 +68,44 @@ class AStarSimplePath:
     @classmethod
     def heuristic(cls, coord1, coord2):
         """
-            -> Calcul the heuristic between two coordinates
+            Calcul the heuristic between two coordinates
 
+            Parameters
             ----------
-            parameters
-            ----------
-            : coord1 (int, int): coordinates
-            : coord1 (int, int): coordinates
-            ----------
-              return
-            ----------
-            : int: manhattan's distance between a and b
+            coord1 : tuple of int
+                coordinates of the first point
+            coord2 : tuple of int
+                coordinates of the second point
+
+            Returns
+            -------
+            int
+                heuristic between a and b
         """
         return AStarSimplePath.manhattan_distance(coord1, coord2)
 
-    def calcul_path(self, start, goal, obstacles, size):
+    @staticmethod
+    def calcul_path(start, goal, obstacles, map_size):
         """
-            -> Calcul the shortest path from a start point to a goal point
+            Calcul the shortest path between two coordinates
 
+            Parameters
             ----------
-            parameters
-            ----------
-            : start (int, int): coordinates of the start point
-            : goal (int, int): coordinates of the goal point
-            : obstacles (list): list of the coordinates corresponding to the obstacles
-            : size (int): size of the map
-            ----------
-              return
-            ----------
-            -> if path exists:
-            : list: shortest path from start to goal
-            -> else:
-            : False: no path exists
+            start : tuple of int
+                coordinates of the start point
+            goal : tuple of int
+                coordinates of the goal point
+            obstacles : *args
+                list of the coordinates of the obstacles
+            map_size : int
+                size of the map
+
+            Returns
+            -------
+            *args
+                shortest path from start to goal
+            bool
+                no path exists
         """
         # init the parameter
         closed_nodes = set()
@@ -121,11 +133,12 @@ class AStarSimplePath:
 
             closed_nodes.add(current)
 
-            for i, j in self.neighbors:
+            for i, j in AStarSimplePath.NEIGHBORS:
                 # new coordinates of the neighbor
                 neighbor = current[0] + i, current[1] + j
                 # skip the coordinates if its an obstacle or outisde the map
-                if neighbor in obstacles or self.outside_the_map(size, neighbor):
+                if neighbor in obstacles or\
+                 AStarSimplePath.outside_the_map(map_size, neighbor):
                     continue
                 # calcul new score
                 tentative_g_score = gscore[current] + \

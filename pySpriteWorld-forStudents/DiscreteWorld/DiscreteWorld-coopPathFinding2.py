@@ -9,17 +9,17 @@ import sys
 from copy import deepcopy
 from itertools import chain
 
-sys.path.append('../AStarAlgorithm')
 sys.path.append('../Utils')
 sys.path.append('../MethodPlayer')
+sys.path.append('../AStarAlgorithm')
 sys.path.append('../Tools')
 
 import numpy as np
 import pygame
 
 import glo
-from AStar3dPath import AStar3dPath as as3d
 from AStarSimplePath import AStarSimplePath
+from method2 import *
 from gameclass import Game, check_init_game_done
 from method1 import Collision as cl
 from ontology import Ontology
@@ -27,7 +27,6 @@ from players import Player
 from sprite import MovingSprite
 from spritebuilder import SpriteBuilder
 from tools import Tools
-from method1 import Collision
 
 # ---------------------------------
 
@@ -42,11 +41,11 @@ game = Game()
 def init(_boardname=None):
     global player, game
     # pathfindingWorld_MultiPlayer4
-    name = _boardname if _boardname is not None else 'pathfindingWorld_MultiPlayer1'
+    name = _boardname if _boardname is not None else 'pathfindingWorld_MultiPlayer4'
     game = Game('Cartes/' + name + '.json', SpriteBuilder)
     game.O = Ontology(True, 'SpriteSheet-32x32/tiny_spritesheet_ontology.csv')
     game.populate_sprite_names(game.O)
-    game.fps = 1 # frames per second
+    game.fps = 500  # frames per second
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
@@ -72,23 +71,19 @@ def main():
     #-----------------------------------#
 
     map_size = 20
-    time = 0
 
     players = [o for o in game.layers['joueur']]
     nbPlayers = len(players)
     score = [0] * nbPlayers
 
-    players = [o for o in game.layers['joueur']]
-    players_path = [None for i in range(nbPlayers)]
     players_step = [0 for i in range(nbPlayers)]
+    players_path = [None for i in range(nbPlayers)]
 
     # get initial position of every players
     initStates = [o.get_rowcol() for o in game.layers['joueur']]
-    initStates = [(0,0), (0, 6), (0,19)]
     print("Init states:", initStates)
     posPlayers = deepcopy(initStates)
 
-    # get position of every objects
     goalStates = []
 
     # get position of every walls
@@ -100,56 +95,46 @@ def main():
         x, y = Tools.random_potion(o, wallStates, map_size, posPlayers)
         game.layers['ramassable'].add(o)
         goalStates.append((x, y))
+
     game.mainiteration()
 
     print("Goal states:", goalStates)
 
-    #--- Creation of the initial path --#
-
-    goalStates = [(0,10),(0, 0), (19,19)]
-    k=0
-    for i in game.layers['joueur']:
-        i.set_rowcol(initStates[k][0], initStates[k][1])
-        k += 1
-
-    game.mainiteration()
-
     for i in range(nbPlayers):
         start = posPlayers[i]
         goal = goalStates[i]
-        obstacles = [posPlayers[j] for j in range(nbPlayers) if j != i]
-        players_path[i] = as3d.calcul_path(start, goal, wallStates+obstacles,
-         map_size, time+i, i)
-
-    print(as3d.reservation)
-    print("\n".join(map(str, players_path)))
+        path = AStarSimplePath.calcul_path(start, goal, wallStates, map_size)
+        players_path[i] = path
 
     print('Initial Path created')
+    print('\n\n'.join(map(str, players_path)))
 
     #-----------------------------------#
     #-------- Players movements --------#
     #-----------------------------------#
 
-    posPlayers = deepcopy(initStates)
+    grouped_path = CoopPath.organize_groups(players_path)
 
-    winner = False
+    iteration_before_next_wave =\
+    CoopPath.number_of_move_before_next_group(players_path, grouped_path)
 
-    while not Tools.finished(score, 10):
+    step = 0
 
-        while cl.detect_collision(posPlayers, players_path, players_step):
-            print(players_step)
-            print(players_path)
-            print(posPlayers)
-            while True: pass
-
-        print(players_path)
+    while not Tools.finished(score, 100):
 
         for j in range(nbPlayers):
 
-            # new position
+            # the player can move if it's its turn (= in the first group)
+            if j in grouped_path[0]:
+                can_move = True
+            else: can_move = False
+
+            if not can_move: continue
+
+            # next position
             new_row, new_col = players_path[j][players_step[j]]
 
-            # udate path information
+            # update player position
             players[j].set_rowcol(new_row, new_col)
             posPlayers[j] = new_row, new_col
 
@@ -157,54 +142,66 @@ def main():
             players_step[j] += 1
 
             # player reach the potion
+            # it wait until every player of the wave have reach their goal
             if posPlayers[j] == goalStates[j]:
+                players_step[j] -= 1
+                continue
 
-                # end of the game
-                if score[j] > 9:
-                    # players_path[j] = as3d.pause(start, j, time, wallStates)
-                    players_step[j] -= 1
-                    continue
+        # every player of the wave have finished its path
+        if iteration_before_next_wave == 0:
 
-                # bring the potion
-                o = players[j].ramasse(game.layers)
+            # remove first group
+            finished_path = grouped_path.pop(0)
+
+            # loop trhough the player that have finished their path
+            for i in finished_path:
+
+                # take the potion
+                o = players[i].ramasse(game.layers)
                 print("Objet trouvé par le joueur ", j)
 
                 # increase the score of player j
-                score[j] += 1
+                score[i] += 1
 
                 # create new random coordinates for the new potion inside the map
-                pot_x, pot_y = Tools.random_potion(o, wallStates, map_size,
-                 posPlayers)
+                pot_x, pot_y = Tools.random_potion(o, wallStates, map_size, posPlayers)
 
                 # update coordinate of the potion
-                goalStates[j] = (pot_x, pot_y)
+                goalStates[i] = (pot_x, pot_y)
                 game.layers['ramassable'].add(o)
 
-                #-------- New Path Creation --------#
+                # calcul the new path to reach the goal
+                players_path[i] = AStarSimplePath.calcul_path(posPlayers[i],
+                 goalStates[i], wallStates, map_size)
 
-                start = posPlayers[j]
-                goal = (pot_x, pot_y)
+                # insert the player in a group without collision
+                CoopPath.put_path_in_group(i, players_path, grouped_path)
+                # with the other players
+                #CoopPath.put_path_in_group(i, players_path, grouped_path)
+                players_step[i] = 0
 
-                players_path[j] =\
-                    as3d.calcul_path(start, goal, wallStates, map_size, time, j)
-                players_step[j] = 0
+            # players of other group as obstacles are considered as obstacles
+            obstacles = [posPlayers[i] for i in range(nbPlayers)\
+             if i not in grouped_path[0]]
 
-                print(score)
+            # calcul new path
+            for i in grouped_path[0]:
+                players_path[i] = AStarSimplePath.calcul_path(posPlayers[i],
+                goalStates[i], wallStates+obstacles, map_size)
 
-            if players_step[j] == len(players_path[j]):
+            # reorganize the groups
+            grouped_path = CoopPath.reorganize_groups(players_path, grouped_path)
 
-                start = posPlayers[j]
-                goal = goalStates[j]
+            # number of step before next wave
+            iteration_before_next_wave =\
+            CoopPath.number_of_move_before_next_group(players_path, grouped_path)
 
-                players_path[j] =\
-                    as3d.calcul_path(start, goal, wallStates, map_size, time, j)
-                players_step[j] = 0
-
-        time += 1
+        step += 1
+        iteration_before_next_wave -= 1
         game.mainiteration()
 
-    print(time)
-    print("scores:", score)
+        print("scores:", score)
+        print('total step', step)
     pygame.quit()
 
 

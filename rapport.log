@@ -1,0 +1,146 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.23)  22 MAR 2019 19:46
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**rapport.tex
+(./rapport.tex
+LaTeX2e <2018-04-01> patch level 5
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/04/06 v1.3b Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2018/06/05 3.22 The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2018/06/05 3.22 Babel switching mechanism
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-french/french.ldf
+Language: french 2018/07/17 v3.5b French support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2018/06/05 3.22 Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count89
+)
+\l@french = a dialect from \language\l@nohyphenation 
+
+
+Package babel Warning: No hyphenation patterns were preloaded for
+(babel)                the language `French' into the format.
+(babel)                Please, configure your TeX system to add them and
+(babel)                rebuild the format. Now I will use the patterns
+(babel)                preloaded for \language=nohyphenation instead on input l
+ine 87.
+
+\l@acadian = a dialect from \language\l@french 
+\FB@nonchar=\count90
+Package babel Info: Making : an active character on input line 415.
+Package babel Info: Making ; an active character on input line 416.
+Package babel Info: Making ! an active character on input line 417.
+Package babel Info: Making ? an active character on input line 418.
+\FBguill@level=\count91
+\FBold@everypar=\toks16
+\FB@Mht=\dimen104
+\mc@charclass=\count92
+\mc@charfam=\count93
+\mc@charslot=\count94
+\std@mcc=\count95
+\dec@mcc=\count96
+\c@FBcaption@count=\count97
+\listindentFB=\dimen105
+\descindentFB=\dimen106
+\labelindentFB=\dimen107
+\labelwidthFB=\dimen108
+\leftmarginFB=\dimen109
+\parindentFFN=\dimen110
+\FBfnindent=\dimen111
+)) (/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+) (./rapport.aux)
+\openout1 = `rapport.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Info: Redefining \degres on input line 5.
+LaTeX Info: Redefining \dots on input line 5.
+LaTeX Info: Redefining \up on input line 5.
+
+
+Package french.ldf Warning: OT1 encoding should not be used for French.
+(french.ldf)                Add \usepackage[T1]{fontenc} to the preamble
+(french.ldf)                of your document; reported on input line 5.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 10.
+
+Overfull \hbox (16.00055pt too wide) in paragraph at lines 23--24
+\OT1/cmr/m/n/10 plusieurs caract^^Seristique, celui-ci doit ^etre capable de s'
+adapter ^^Ra son environnement,
+ []
+
+[1
+
+{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (0.47273pt too wide) in paragraph at lines 41--44
+\OT1/cmr/m/n/10 coordonn^^Sees Une fois chaque chemin calcul^^Se, on garde en m
+^^Semoire chaque chemin
+ []
+
+[2] [3] (./rapport.aux) ) 
+Here is how much of TeX's memory you used:
+ 1532 strings out of 494587
+ 21361 string characters out of 6177759
+ 95241 words of memory out of 5000000
+ 5216 multiletter control sequences out of 15000+600000
+ 7894 words of font info for 28 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 28i,7n,31p,621b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on rapport.pdf (3 pages, 60350 bytes).
+PDF statistics:
+ 30 PDF objects out of 1000 (max. 8388607)
+ 20 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

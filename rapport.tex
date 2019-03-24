@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\begin{document}
+	
+	\title{Rapport de Mini-Projet 3I025 \\
+		\large Recherche de chemins coopératifs entre agents}
+	\author{Castellon Clément \and Zhang Noé}
+	\maketitle
+	
+	\part{introduction}
+	
+		\section{Projet}
+		
+			Nous considèrons plusieurs agents en compétition qui cherchent chacun à atteindre leur propre objectif et nous souhaitons éviter qu'il y ait des collisions entre eux.
+			Nous cherchons à maximiser la coopération entre les agents et ainsi minimiser le temps total nécessaire à ce que chacun atteigne son objectif.
+			
+		\section{Notions de base}
+	
+			\subsection{Agents Intelligents}
+			% a peu près a reformuler pour amener un déroulement
+			Un agent intelligent est une entitée autonome qui peut-être caractérisé par plusieurs caractéristique, celui-ci doit être capable de s'adapter à son environnement, aussi il doit pouvoir être configurable afin de répondre aux besoins précis de l'utilisateur. De plus, dans un cadre plus avancé, il doit savoir profiter de ses expériences passées afin de mieux comprendre les souhaits de l'utilisateur. Lors du déploiement de plusieurs agents la communication et l'interaction entre eux est primordiale afin de maximiser la coopération. % à compléter amenant sur la problématique
+			
+			\subsection{Collisions}
+				Il existe 2 type de collisions différentes, la première occure lorsque deux agents différents veulent accéder à la meme case au même moment, la seconde à lieu lorsque ceux-ci sont face à face et vont se croiser.
+			
+			\subsection{Solutions}
+				Afin d'empêcher les différentes collisions qui pourrait arriver, différentes solutions peuvent être implémenté afin que les agents puissent réagir de manière autonome .
+		
+	\part{Stratégies}
+	
+		\section{Path-Splicing}
+		
+			\subsection{Idée globale}
+			
+			Cette première implémentation consiste à modifier le chemin emprunté par un agent seulement lorsque celui-ci détecte une collision c'est-à-dire à l'instant précédant la collision, en effet lorsqu'un agent détecte une collision avec un autre, il va considérer le lieux de collision comme un obstacle et va calculer en conséquence un nouveau chemin qui lui permettra d'atteindre un état postérieur de son chemin en tenant compte du lieux de collision.
+			
+			\subsection{Implémentation}
+			
+			Dans un premier temps chaque agents calule indépendemment des autres un chemin lui permettant d'atteindre son objectif, pour cela nous avons utilisé l'algoritme A étoile qui permet de calculer le plus court chemin entre deux coordonnées
+			Une fois chaque chemin calculé, on garde en mémoire chaque chemin et on associe un compteur à chaque agent qui correspond à l'étape où se trouve l'agent par rapport à son chemin associé.
+			Un ordre de passage est associé à chaque agent cela à des conséquences sur le chemin des agents. En effet chaque agent calcul les collisions par rapport à ceux qui ont déjà effectuer leur déplacements.
+			
+			\subsection{Résultat}
+
+			Graphique à mettre
+			
+		\section{Coopérative Basique}
+		
+			\subsection{Idée globale}
+			Pour cette stratégie, les agents se déplacent par groupes formés à partir des chemins qui ne produisent pas de collisions qui sont alors executé en différés, différentes stratégies peuvent être implémentés afin de définir l'ordre de passage.
+		
+			\subsection{Implémentation}
+			Pour chaque agent, un chemin est calculé à partir de l'algorithme A étoile sans tenir compte des autres agents. On forme ensuite des groupes d'agents en fonction des chemins qui forment pas de collisions s'ils ont lieux en même temps. L'ordre de passage des groupes est alors organisé grâce à une stratégie choisie, la stratégie de base consistant à prendre le premier groupe formé et ainsi de suite. Lorsque tout les agents d'un groupe ont atteint leur objectif, on recalcule un chemin vers leur nouvel objectif et on leur associe un groupe.
+			Enfin, avant d'envoyer le prochain groupe on va recalculer leur chemin en tenant compte de la position courante des agents des autres groupes. Si deux nouveaux chemins forme produisent une collision on en enlève un des deux et on envoie le groupe de chemin.
+			
+			\subsection{Résultat}
+			Graphique à mettre
+		
+		\section{Coopérative avancée}
+
+			\subsection{Idée globale}
+			On souhaite utiliser une structure de données partagée qui correspond à une table de réservation où l'on va stocker des triplets qui correspondent à la position à un instant donnée, si une case est réservée, les autres agents ne pourront pas y accéder évitant ainsi les collisions.
+
+			\subsection{Implémentation}
+			Le chemin de chaque agent prend en compte celui des agents précédents, en effet, pour un agent donné on calcule un chemin partiel d'un nombre de case constant qui dirige l'agent vers son objectif. A différence des méthodes précédentes, on utilise comme heuristique la vraie distance, il s'agit de la distance qui sépare l'agent de sa destination. Afin de la calculer on utilise l'algorithme A étoile et on calcule le chemin en sens inverse on obtient alors la vrai distance en regardant la valeur g dans les noeud fermés.
+			
+			\subsection{Résultat}
+			Graphique à mettre
+					
+		\section{Comparaison}
+	
+	\part{Conclusion}
+		
+\end{document}
