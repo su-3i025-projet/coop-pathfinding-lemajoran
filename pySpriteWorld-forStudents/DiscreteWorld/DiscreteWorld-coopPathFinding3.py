@@ -42,11 +42,11 @@ game = Game()
 def init(_boardname=None):
     global player, game
     # pathfindingWorld_MultiPlayer4
-    name = _boardname if _boardname is not None else 'pathfindingWorld_MultiPlayer1'
+    name = _boardname if _boardname is not None else 'pathfindingWorld_MultiPlayer4'
     game = Game('Cartes/' + name + '.json', SpriteBuilder)
     game.O = Ontology(True, 'SpriteSheet-32x32/tiny_spritesheet_ontology.csv')
     game.populate_sprite_names(game.O)
-    game.fps = 1 # frames per second
+    game.fps = 200   # frames per second
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
@@ -84,7 +84,6 @@ def main():
 
     # get initial position of every players
     initStates = [o.get_rowcol() for o in game.layers['joueur']]
-    initStates = [(0,0), (0, 6), (0,19)]
     print("Init states:", initStates)
     posPlayers = deepcopy(initStates)
 
@@ -106,20 +105,11 @@ def main():
 
     #--- Creation of the initial path --#
 
-    goalStates = [(0,10),(0, 0), (19,19)]
-    k=0
-    for i in game.layers['joueur']:
-        i.set_rowcol(initStates[k][0], initStates[k][1])
-        k += 1
-
-    game.mainiteration()
-
     for i in range(nbPlayers):
         start = posPlayers[i]
         goal = goalStates[i]
-        obstacles = [posPlayers[j] for j in range(nbPlayers) if j != i]
-        players_path[i] = as3d.calcul_path(start, goal, wallStates+obstacles,
-         map_size, time+i, i)
+        players_path[i] = as3d.calcul_path(start, goal, wallStates,
+         map_size, time, i)
 
     print(as3d.reservation)
     print("\n".join(map(str, players_path)))
@@ -134,15 +124,7 @@ def main():
 
     winner = False
 
-    while not Tools.finished(score, 10):
-
-        while cl.detect_collision(posPlayers, players_path, players_step):
-            print(players_step)
-            print(players_path)
-            print(posPlayers)
-            while True: pass
-
-        print(players_path)
+    while not Tools.finished(score, 1000):
 
         for j in range(nbPlayers):
 
@@ -160,9 +142,12 @@ def main():
             if posPlayers[j] == goalStates[j]:
 
                 # end of the game
-                if score[j] > 9:
+                if score[j] > 999:
                     # players_path[j] = as3d.pause(start, j, time, wallStates)
-                    players_step[j] -= 1
+                    start = posPlayers[j]
+                    players_path[j] =\
+                        as3d.calcul_path(start, start, wallStates, map_size, time+1, j)
+                    players_step[j] = 0
                     continue
 
                 # bring the potion
@@ -186,20 +171,17 @@ def main():
                 goal = (pot_x, pot_y)
 
                 players_path[j] =\
-                    as3d.calcul_path(start, goal, wallStates, map_size, time, j)
+                    as3d.calcul_path(start, goal, wallStates, map_size, time+1, j)
                 players_step[j] = 0
 
                 print(score)
 
             if players_step[j] == len(players_path[j]):
-
                 start = posPlayers[j]
                 goal = goalStates[j]
-
                 players_path[j] =\
-                    as3d.calcul_path(start, goal, wallStates, map_size, time, j)
+                    as3d.calcul_path(start, goal, wallStates, map_size, time+1, j)
                 players_step[j] = 0
-
         time += 1
         game.mainiteration()
 

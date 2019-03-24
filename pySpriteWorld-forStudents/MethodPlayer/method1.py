@@ -9,8 +9,7 @@ class Collision:
 
     @staticmethod
     def detect_collision(pos_players, players_path, players_step):
-        """
-            Detect collision between the players
+        """Detect collision between the players
 
             Parameters
             ----------
@@ -59,8 +58,7 @@ class Collision:
 
     @classmethod
     def is_valid_coordinates(cls, coord, map_size, obstacles):
-        """
-            Check if some coordinates are valid
+        """Check if some coordinates are valid
 
             Parameters
             ----------
@@ -87,8 +85,7 @@ class Collision:
 
     @classmethod
     def random_move(cls, obstacles, player, players_path, players_step, pos_players):
-        """
-            Get a valid random move from a player
+        """Get a valid random move from a player
 
             Parameters
             ----------
@@ -121,8 +118,7 @@ class Collision:
     @staticmethod
     def manage_collision(player, players_path, players_step,
      pos_players, wallStates, again=False):
-        """
-            Modify the path of the player to evoid a collision
+        """Modify the path of the player to evoid a collision
 
             Parameters
             ----------

@@ -11,8 +11,7 @@ class Tools:
 
     @staticmethod
     def random_potion(potion, wallStates, map_size, posPlayers):
-        """
-            Place a potion inside the map with random coordinates
+        """Place a potion inside the map with random coordinates
 
             Parameters
             ----------
@@ -40,8 +39,7 @@ class Tools:
 
     @staticmethod
     def finished(score, n):
-        """
-            Check if the number of potion required by every player
+        """Check if the number of potion required by every player
             has been reached
 
             Parameters

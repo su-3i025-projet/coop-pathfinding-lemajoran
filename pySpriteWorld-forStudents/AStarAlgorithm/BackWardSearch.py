@@ -6,8 +6,7 @@ class BackWardSearch(AStarSimplePath):
     NEIGHBORS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
     def __init__(self, start, goal, wallStates, map_size):
-        """
-            Class representing the A* algorithm using the manhattan distance as
+        """Class representing the A* algorithm using the manhattan distance as
             heuristic
 
             Attributes
@@ -54,8 +53,7 @@ class BackWardSearch(AStarSimplePath):
         heapq.heappush(self.open_nodes, (self.fscore[start], start))
 
     def g_value_from_goal(self, coord):
-        """
-            Calcul the g score value of a node from the start point
+        """Calcul the g score value of a node from the start point
 
             Parameters
             ----------
@@ -69,7 +67,7 @@ class BackWardSearch(AStarSimplePath):
         """
         # while there is nodes to explore
         while not coord in self.closed_nodes:
-            
+
             current = heapq.heappop(self.open_nodes)[1]
             self.closed_nodes.add(current)
 
@@ -85,7 +83,7 @@ class BackWardSearch(AStarSimplePath):
 
                 # calcul new score
                 tentative_g_score = self.gscore[current] + \
-                    BackWardSearch.heuristic(current, neighbor)
+                self.heuristic(current, neighbor)
 
                 if neighbor in self.closed_nodes and\
                 tentative_g_score >= self.gscore.get(neighbor, 0):
@@ -98,8 +96,8 @@ class BackWardSearch(AStarSimplePath):
                     self.came_from[neighbor] = current
                     self.gscore[neighbor] = tentative_g_score
                     self.fscore[neighbor] = tentative_g_score + \
-                        BackWardSearch.heuristic(neighbor, coord)
-
+                        self.heuristic(neighbor, self.goal)
                     # continue to explore this path
                     heapq.heappush(self.open_nodes, (self.fscore[neighbor], neighbor))
+
         return self.gscore[coord]

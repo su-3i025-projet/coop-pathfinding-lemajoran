@@ -5,8 +5,7 @@ class CoopPath:
     @classmethod
     # test if there is a collision between player1 and another player
     def detect_collision(cls, path1, path2):
-        """
-            Detect a collision between two paths
+        """Detect a collision between two paths
 
             Parameters
             ----------
@@ -46,8 +45,7 @@ class CoopPath:
 
     @staticmethod
     def put_path_in_group(index, paths, path_group):
-        """
-            Add a path in a list of groups, evoid collision
+        """Add a path in a list of groups, evoid collision
 
             Parameters
             ----------
@@ -76,8 +74,7 @@ class CoopPath:
 
     @staticmethod
     def organize_groups(paths):
-        """
-            Organize the different groups from a list of paths
+        """Organize the different groups from a list of paths
 
             Parameters
             ----------
@@ -106,8 +103,7 @@ class CoopPath:
 
     @staticmethod
     def number_of_move_before_next_group(paths, grouped_path):
-        """
-            calcul the number of move before the next group of path
+        """Calcul the number of move before the next group of path
             has to start
 
             Parameters
@@ -127,8 +123,7 @@ class CoopPath:
 
     @staticmethod
     def reorganize_groups(paths, path_group):
-        """
-            Reorganize a list of groups
+        """Reorganize a list of groups
 
             Parameters
             ----------

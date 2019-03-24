@@ -2,8 +2,7 @@ import heapq
 
 class AStarSimplePath:
 
-    """
-        Class representing the A* algorithm using manhattan distance as
+    """Class representing the A* algorithm using manhattan distance as
         heuristic
 
         Attributes
@@ -25,8 +24,7 @@ class AStarSimplePath:
 
     @classmethod
     def outside_the_map(cls, size, coord):
-        """
-            Check if a point is outside of the map surface
+        """Check if a point is outside of the map surface
 
             Parameters
             ----------
@@ -46,8 +44,7 @@ class AStarSimplePath:
 
     @staticmethod
     def manhattan_distance(coord1, coord2):
-        """
-            Calcul the distance of manhattan between two coordinates
+        """Calcul the distance of manhattan between two coordinates
 
             Parameters
             ----------
@@ -67,8 +64,7 @@ class AStarSimplePath:
 
     @classmethod
     def heuristic(cls, coord1, coord2):
-        """
-            Calcul the heuristic between two coordinates
+        """Calcul the heuristic between two coordinates
 
             Parameters
             ----------
@@ -86,8 +82,7 @@ class AStarSimplePath:
 
     @staticmethod
     def calcul_path(start, goal, obstacles, map_size):
-        """
-            Calcul the shortest path between two coordinates
+        """Calcul the shortest path between two coordinates
 
             Parameters
             ----------
@@ -128,6 +123,7 @@ class AStarSimplePath:
                 while current in came_from:
                     data.append(current)
                     current = came_from[current]
+
                 # reverse the list to have the path from the start to the goal
                 return data[::-1]
 
@@ -143,6 +139,7 @@ class AStarSimplePath:
                 # calcul new score
                 tentative_g_score = gscore[current] + \
                     AStarSimplePath.heuristic(current, neighbor)
+
                 if neighbor in closed_nodes and tentative_g_score >= gscore.get(neighbor, 0):
                     continue
                 # node not visited yet or better score than before for these coordinates
