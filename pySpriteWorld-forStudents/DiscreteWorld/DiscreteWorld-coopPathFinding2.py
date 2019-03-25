@@ -57,13 +57,6 @@ def init(_boardname=None):
 
 def main():
 
-    # for arg in sys.argv:
-    iterations = 50  # default
-    if len(sys.argv) == 2:
-        iterations = int(sys.argv[1])
-    print("Iterations: ")
-    print(iterations)
-
     init()
 
     #-----------------------------------#
