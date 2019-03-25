@@ -29,8 +29,8 @@ class Tools:
             tuple of int
                 coordinates of the potion
         """
-        x = random.randint(0, map_size - 1)
-        y = random.randint(0, map_size - 1)
+        x = random.randint(0,map_size - 1)
+        y = random.randint(0,map_size - 1)
         while (x, y) in wallStates or (x, y) in posPlayers:
             x = random.randint(0, map_size - 1)
             y = random.randint(0, map_size - 1)

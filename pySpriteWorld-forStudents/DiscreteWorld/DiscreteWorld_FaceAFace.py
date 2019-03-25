@@ -8,6 +8,8 @@ import random
 import sys
 from itertools import chain
 
+import matplotlib.pyplot as plt
+
 import numpy as np
 import pygame
 
