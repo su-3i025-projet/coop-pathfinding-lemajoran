@@ -45,7 +45,7 @@ def init(_boardname=None):
     game = Game('Cartes/' + name + '.json', SpriteBuilder)
     game.O = Ontology(True, 'SpriteSheet-32x32/tiny_spritesheet_ontology.csv')
     game.populate_sprite_names(game.O)
-    game.fps = 5  # frames per second
+    game.fps = 200  # frames per second
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
@@ -113,7 +113,7 @@ def main():
 
     step = 0
 
-    while not Tools.finished(score, 20):
+    while not Tools.finished(score, 1):
 
         for j in range(nbPlayers):
 
@@ -187,10 +187,10 @@ def main():
                 players_path[i] = AStarSimplePath.calcul_path(posPlayers[i],
                 goalStates[i], wallStates+obstacles, map_size)
                 if players_path[i] is False:
-                    temp_rem.append(i)
+                    temp_rem.append(grouped_path[0].index(i))
 
             for i in temp_rem:
-                grouped_path.append([[0].pop(i)])
+                grouped_path.append([grouped_path[0].pop(i)])
 
             # number of step before next wave
             iteration_before_next_wave =\

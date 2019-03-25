@@ -71,7 +71,7 @@ def main(nb_pickups):
 
     players_step = [0 for i in range(nbPlayers)]
     players_path = [None for i in range(nbPlayers)]
-    
+
     #data for plotting
     ceil_iterations = [0 for i in range (len(players))]
     total_iterations = 0
@@ -102,7 +102,7 @@ def main(nb_pickups):
         goal = goalStates[i]
         path = AStarSimplePath.calcul_path(start, goal, wallStates, map_size)
         players_path[i] = path
-        print ('chemin :', len(players_path[i]))   
+        print ('chemin :', len(players_path[i]))
         ceil_iterations[i] += len(players_path[i])
 
     print('Initial Path created')
@@ -172,8 +172,8 @@ def main(nb_pickups):
                 # calcul the new path to reach the goal
                 players_path[i] = AStarSimplePath.calcul_path(posPlayers[i],
                  goalStates[i], wallStates, map_size)
-                 
-                
+
+
 
                 # insert the player in a group without collision
                 CoopPath.put_path_in_group(i, players_path, grouped_path)
@@ -189,18 +189,18 @@ def main(nb_pickups):
             for i in grouped_path[0]:
                 players_path[i] = AStarSimplePath.calcul_path(posPlayers[i],
                 goalStates[i], wallStates+obstacles, map_size)
-                
+
             # reorganize the groups
             grouped_path = CoopPath.reorganize_groups(players_path, grouped_path)
             for i in grouped_path[0]:
-                
-                print ('chemin :', len(players_path[i]))  
+
+                print ('chemin :', len(players_path[i]))
                 ceil_iterations[i] += len(players_path[i])
 
             # number of step before next wave
             iteration_before_next_wave =\
             CoopPath.number_of_move_before_next_group(players_path, grouped_path)
-        
+
         step += 1
         iteration_before_next_wave -= 1
         game.mainiteration()
