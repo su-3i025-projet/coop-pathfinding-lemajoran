@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.23)  25 MAR 2019 23:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.23)  26 MAR 2019 00:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -220,177 +220,200 @@ Underfull \hbox (badness 1048) in paragraph at lines 21--23
  []
 
 
-Underfull \hbox (badness 2809) in paragraph at lines 30--31
-\OT1/cmr/m/n/10 une entit^^See autonome capable d'ex^^Secuter des
+Underfull \hbox (badness 2828) in paragraph at lines 25--26
+\OT1/cmr/m/n/10 troisi^^Reme utilise une table de r^^Seservation de
  []
 
 
-Underfull \hbox (badness 2809) in paragraph at lines 32--33
-\OT1/cmr/m/n/10 une entit^^See autonome capable d'ex^^Secuter des
+Underfull \hbox (badness 4569) in paragraph at lines 30--31
+\OT1/cmr/m/n/10 une entit^^Se autonome capable d'ex^^Secuter des
  []
 
 
-Underfull \hbox (badness 1789) in paragraph at lines 32--33
+Underfull \hbox (badness 1789) in paragraph at lines 30--31
 \OT1/cmr/m/n/10 Tout d'abord, il doit ^etre capable d'interagir
  []
 
 
-Underfull \hbox (badness 4378) in paragraph at lines 32--33
+Underfull \hbox (badness 4378) in paragraph at lines 30--31
 \OT1/cmr/m/n/10 avec son environnement et de s'adapter en
  []
 
-[1{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}
 
-
-]
-Underfull \hbox (badness 4084) in paragraph at lines 43--44
+Underfull \hbox (badness 4084) in paragraph at lines 41--42
 []\OT1/cmr/m/n/10 Dans cette premi^^Rere impl^^Sementation, l'id^^See
  []
 
 
-Underfull \hbox (badness 3333) in paragraph at lines 43--44
+Underfull \hbox (badness 3333) in paragraph at lines 41--42
 \OT1/cmr/m/n/10 consiste ^^Ra modifier le chemin emprunt^^Se par
  []
 
 
-Underfull \hbox (badness 4765) in paragraph at lines 43--44
+Underfull \hbox (badness 4765) in paragraph at lines 41--42
 \OT1/cmr/m/n/10 collision c'est-^^Ra-dire ^^Ra l'instant pr^^Sec^^Sedant la
  []
 
 
-Underfull \hbox (badness 1365) in paragraph at lines 43--44
+Underfull \hbox (badness 1365) in paragraph at lines 41--42
 \OT1/cmr/m/n/10 collision, en effet lorsqu'un agent d^^Setecte une
  []
 
 
-Underfull \hbox (badness 4120) in paragraph at lines 46--51
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+Underfull \hbox (badness 4120) in paragraph at lines 44--49
 \OT1/cmr/m/n/10 ind^^Sependamment des autres des chemins lui
  []
 
 
-Underfull \hbox (badness 1052) in paragraph at lines 46--51
+Underfull \hbox (badness 1052) in paragraph at lines 44--49
 \OT1/cmr/m/n/10 fois les chemins calcul^^Ses, nous les gardons en
  []
 
 
-Underfull \hbox (badness 1661) in paragraph at lines 53--54
+Underfull \hbox (badness 1661) in paragraph at lines 51--52
  [] \OT1/cmr/m/n/10 Dans le cas g^^Sen^^Seral cette impl^^Sementation
  []
 
 
-Underfull \hbox (badness 1997) in paragraph at lines 58--59
+Underfull \hbox (badness 1997) in paragraph at lines 56--57
 []\OT1/cmr/m/n/10 Dans cette seconde strat^^Segie, les agents se
  []
 
 
-Underfull \hbox (badness 2426) in paragraph at lines 58--59
+Underfull \hbox (badness 2426) in paragraph at lines 56--57
 \OT1/cmr/m/n/10 tels qu aucun chemin appartenant au m^eme
  []
 
 
-Underfull \hbox (badness 1635) in paragraph at lines 61--64
+Underfull \hbox (badness 1635) in paragraph at lines 59--62
 \OT1/cmr/m/n/10 courante des autres agents, ce traitement est
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--67
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
  [] \OT1/cmr/m/n/10 Cette impl^^Sementation se rapproche de
  []
 
 
-Underfull \hbox (badness 1168) in paragraph at lines 66--67
+Underfull \hbox (badness 1168) in paragraph at lines 64--65
 \OT1/cmr/m/n/10 l'impl^^Sementation na^^?^^Pve qui consiste ^^Ra ex^^Secuter
  []
 
 
-Underfull \hbox (badness 7777) in paragraph at lines 71--73
+Underfull \hbox (badness 1968) in paragraph at lines 64--65
+\OT1/cmr/m/n/10 La coop^^Seration n'est que tr^^Res peu optimis^^See,
+ []
+
+
+Underfull \hbox (badness 7777) in paragraph at lines 69--71
 []\OT1/cmr/m/n/10 Dans cette derni^^Rere impl^^Sementation, nous
  []
 
+
+Underfull \hbox (badness 5260) in paragraph at lines 69--71
+\OT1/cmr/m/n/10 utilisons une structure de donn^^Sees partag^^See
+ []
+
+
+Underfull \hbox (badness 2556) in paragraph at lines 69--71
+\OT1/cmr/m/n/10 seulement si la position de celui-ci est d^^Sej^^Ra
+ []
+
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
 []\OT1/cmr/m/n/10 Les chemins des agents sont cr^^Se^^Ses
  []
 
 
-Underfull \hbox (badness 6300) in paragraph at lines 77--78
+Underfull \hbox (badness 6300) in paragraph at lines 75--76
 \OT1/cmr/m/n/10 s^^Sequentiellement tout en tenant compte du
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
+Underfull \hbox (badness 10000) in paragraph at lines 86--87
  [] \OT1/cmr/m/n/10 Cette solution plus complexe que les
  []
 
 
-Underfull \hbox (badness 2503) in paragraph at lines 88--89
+Underfull \hbox (badness 2503) in paragraph at lines 86--87
 \OT1/cmr/m/n/10 pr^^Sec^^Sedentes offrent une solution plus avanc^^See
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
 []\OT1/cmr/m/n/10 Les impl^^Sementations propos^^Sees poss^^Redent
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--94
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
 []\OT1/cmr/bx/n/12 Performance des
  []
 
 <compare_methods.png, id=13, 462.528pt x 346.896pt>
 File: compare_methods.png Graphic file (type png)
 <use compare_methods.png>
-Package pdftex.def Info: compare_methods.png  used on input line 97.
+Package pdftex.def Info: compare_methods.png  used on input line 95.
 (pdftex.def)             Requested size: 231.26378pt x 173.44757pt.
 
-Overfull \hbox (10.26378pt too wide) in paragraph at lines 97--98
+Overfull \hbox (10.26378pt too wide) in paragraph at lines 95--96
 [][] 
  []
 
 
-Underfull \hbox (badness 4001) in paragraph at lines 102--103
-\OT1/cmr/m/n/10 une droite avec une pente plus ^^Selev^^See. De
- []
-
-
-Underfull \hbox (badness 1314) in paragraph at lines 102--103
-\OT1/cmr/m/n/10 leurs r^^Sesultats sont tr^^Res proches cependant la
+Underfull \hbox (badness 2617) in paragraph at lines 100--101
+\OT1/cmr/m/n/10 m^^Sethodes semblent ^etre chacunes repr^^Sesent^^Sees
  []
 
 [3 <./compare_methods.png>]
 <CPU_time.png, id=22, 462.528pt x 346.896pt>
 File: CPU_time.png Graphic file (type png)
 <use CPU_time.png>
-Package pdftex.def Info: CPU_time.png  used on input line 109.
+Package pdftex.def Info: CPU_time.png  used on input line 107.
 (pdftex.def)             Requested size: 231.26378pt x 173.44757pt.
 
-Overfull \hbox (10.26378pt too wide) in paragraph at lines 109--110
+Overfull \hbox (10.26378pt too wide) in paragraph at lines 107--108
 [][] 
  []
 
 
-Underfull \hbox (badness 3815) in paragraph at lines 114--115
+Underfull \hbox (badness 3815) in paragraph at lines 112--113
 []\OT1/cmr/m/n/10 Le temps d'ex^^Secution CPU correspond au
  []
 
 
-Underfull \hbox (badness 7081) in paragraph at lines 122--123
+Underfull \hbox (badness 7081) in paragraph at lines 120--121
 []\OT1/cmr/m/n/10 Au cours de ce projet, nous avons pu
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
+Underfull \hbox (badness 10000) in paragraph at lines 120--121
 \OT1/cmr/m/n/10 exp^^Serimenter diff^^Serentes strat^^Segies, chacune
  []
 
 
-Underfull \hbox (badness 5652) in paragraph at lines 122--123
-\OT1/cmr/m/n/10 optimal semble d^^Sependre de l'environnement
+Underfull \hbox (badness 4366) in paragraph at lines 120--121
+\OT1/cmr/m/n/10 poss^^Sedant leurs points forts et leurs points
  []
 
 
-Underfull \hbox (badness 2173) in paragraph at lines 122--123
-\OT1/cmr/m/n/10 dans lequel celle-ci va ^etre utilis^^Se. Pour des
+Underfull \hbox (badness 1067) in paragraph at lines 120--121
+\OT1/cmr/m/n/10 faibles. Au vu des r^^Sesultats obtenus, le choix
+ []
+
+
+Underfull \hbox (badness 3792) in paragraph at lines 120--121
+\OT1/cmr/m/n/10 de la strat^^Segie optimal semble d^^Sependre de
+ []
+
+
+Underfull \hbox (badness 1571) in paragraph at lines 120--121
+\OT1/cmr/m/n/10 une m^^Sethode qui poss^^Rede une impl^^Sementation
  []
 
 [4 <./CPU_time.png>] (./rapport.aux)
@@ -405,7 +428,7 @@ Here is how much of TeX's memory you used:
  6341 multiletter control sequences out of 15000+600000
  8808 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,8n,31p,883b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,8n,31p,879b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
@@ -413,7 +436,7 @@ live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmss10.pfb>
-Output written on rapport.pdf (4 pages, 161664 bytes).
+Output written on rapport.pdf (4 pages, 161212 bytes).
 PDF statistics:
  50 PDF objects out of 1000 (max. 8388607)
  32 compressed objects within 1 object stream
