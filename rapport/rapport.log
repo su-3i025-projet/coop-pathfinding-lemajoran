@@ -1,0 +1,422 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.23)  25 MAR 2019 23:59
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**rapport.tex
+(./rapport.tex
+LaTeX2e <2018-04-01> patch level 5
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/04/06 v1.3b Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2018/06/05 3.22 The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2018/06/05 3.22 Babel switching mechanism
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-french/french.ldf
+Language: french 2018/07/17 v3.5b French support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2018/06/05 3.22 Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count89
+)
+\l@french = a dialect from \language\l@nohyphenation 
+
+
+Package babel Warning: No hyphenation patterns were preloaded for
+(babel)                the language `French' into the format.
+(babel)                Please, configure your TeX system to add them and
+(babel)                rebuild the format. Now I will use the patterns
+(babel)                preloaded for \language=nohyphenation instead on input l
+ine 87.
+
+\l@acadian = a dialect from \language\l@french 
+\FB@nonchar=\count90
+Package babel Info: Making : an active character on input line 415.
+Package babel Info: Making ; an active character on input line 416.
+Package babel Info: Making ! an active character on input line 417.
+Package babel Info: Making ? an active character on input line 418.
+\FBguill@level=\count91
+\FBold@everypar=\toks16
+\FB@Mht=\dimen104
+\mc@charclass=\count92
+\mc@charfam=\count93
+\mc@charslot=\count94
+\std@mcc=\count95
+\dec@mcc=\count96
+\c@FBcaption@count=\count97
+\listindentFB=\dimen105
+\descindentFB=\dimen106
+\labelindentFB=\dimen107
+\labelwidthFB=\dimen108
+\leftmarginFB=\dimen109
+\parindentFFN=\dimen110
+\FBfnindent=\dimen111
+)) (/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+(./rapport.aux
+
+LaTeX Warning: Label `fig_sim' multiply defined.
+
+)
+\openout1 = `rapport.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Info: Redefining \degres on input line 6.
+LaTeX Info: Redefining \dots on input line 6.
+LaTeX Info: Redefining \up on input line 6.
+
+
+Package french.ldf Warning: OT1 encoding should not be used for French.
+(french.ldf)                Add \usepackage[T1]{fontenc} to the preamble
+(french.ldf)                of your document; reported on input line 6.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count98
+\scratchdimen=\dimen114
+\scratchbox=\box26
+\nofMPsegments=\count99
+\nofMParguments=\count100
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count101
+\MPscratchDim=\dimen115
+\MPnumerator=\count102
+\makeMPintoPDFobject=\count103
+\everyMPtoPDFconversion=\toks19
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 11.
+
+Underfull \hbox (badness 1783) in paragraph at lines 21--23
+\OT1/cmr/m/n/10 qui cherchent chacun ^^Ra atteindre leur propre
+ []
+
+
+Underfull \hbox (badness 1337) in paragraph at lines 21--23
+\OT1/cmr/m/n/10 diff^^Serents agents. Nous cherchons ^^Ra maximiser
+ []
+
+
+Underfull \hbox (badness 1048) in paragraph at lines 21--23
+\OT1/cmr/m/n/10 la coop^^Seration entre les agents autrement dit,
+ []
+
+
+Underfull \hbox (badness 2809) in paragraph at lines 30--31
+\OT1/cmr/m/n/10 une entit^^See autonome capable d'ex^^Secuter des
+ []
+
+
+Underfull \hbox (badness 2809) in paragraph at lines 32--33
+\OT1/cmr/m/n/10 une entit^^See autonome capable d'ex^^Secuter des
+ []
+
+
+Underfull \hbox (badness 1789) in paragraph at lines 32--33
+\OT1/cmr/m/n/10 Tout d'abord, il doit ^etre capable d'interagir
+ []
+
+
+Underfull \hbox (badness 4378) in paragraph at lines 32--33
+\OT1/cmr/m/n/10 avec son environnement et de s'adapter en
+ []
+
+[1{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+Underfull \hbox (badness 4084) in paragraph at lines 43--44
+[]\OT1/cmr/m/n/10 Dans cette premi^^Rere impl^^Sementation, l'id^^See
+ []
+
+
+Underfull \hbox (badness 3333) in paragraph at lines 43--44
+\OT1/cmr/m/n/10 consiste ^^Ra modifier le chemin emprunt^^Se par
+ []
+
+
+Underfull \hbox (badness 4765) in paragraph at lines 43--44
+\OT1/cmr/m/n/10 collision c'est-^^Ra-dire ^^Ra l'instant pr^^Sec^^Sedant la
+ []
+
+
+Underfull \hbox (badness 1365) in paragraph at lines 43--44
+\OT1/cmr/m/n/10 collision, en effet lorsqu'un agent d^^Setecte une
+ []
+
+
+Underfull \hbox (badness 4120) in paragraph at lines 46--51
+\OT1/cmr/m/n/10 ind^^Sependamment des autres des chemins lui
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 46--51
+\OT1/cmr/m/n/10 fois les chemins calcul^^Ses, nous les gardons en
+ []
+
+
+Underfull \hbox (badness 1661) in paragraph at lines 53--54
+ [] \OT1/cmr/m/n/10 Dans le cas g^^Sen^^Seral cette impl^^Sementation
+ []
+
+
+Underfull \hbox (badness 1997) in paragraph at lines 58--59
+[]\OT1/cmr/m/n/10 Dans cette seconde strat^^Segie, les agents se
+ []
+
+
+Underfull \hbox (badness 2426) in paragraph at lines 58--59
+\OT1/cmr/m/n/10 tels qu aucun chemin appartenant au m^eme
+ []
+
+
+Underfull \hbox (badness 1635) in paragraph at lines 61--64
+\OT1/cmr/m/n/10 courante des autres agents, ce traitement est
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
+ [] \OT1/cmr/m/n/10 Cette impl^^Sementation se rapproche de
+ []
+
+
+Underfull \hbox (badness 1168) in paragraph at lines 66--67
+\OT1/cmr/m/n/10 l'impl^^Sementation na^^?^^Pve qui consiste ^^Ra ex^^Secuter
+ []
+
+
+Underfull \hbox (badness 7777) in paragraph at lines 71--73
+[]\OT1/cmr/m/n/10 Dans cette derni^^Rere impl^^Sementation, nous
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
+[]\OT1/cmr/m/n/10 Les chemins des agents sont cr^^Se^^Ses
+ []
+
+
+Underfull \hbox (badness 6300) in paragraph at lines 77--78
+\OT1/cmr/m/n/10 s^^Sequentiellement tout en tenant compte du
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
+ [] \OT1/cmr/m/n/10 Cette solution plus complexe que les
+ []
+
+
+Underfull \hbox (badness 2503) in paragraph at lines 88--89
+\OT1/cmr/m/n/10 pr^^Sec^^Sedentes offrent une solution plus avanc^^See
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
+[]\OT1/cmr/m/n/10 Les impl^^Sementations propos^^Sees poss^^Redent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--94
+[]\OT1/cmr/bx/n/12 Performance des
+ []
+
+<compare_methods.png, id=13, 462.528pt x 346.896pt>
+File: compare_methods.png Graphic file (type png)
+<use compare_methods.png>
+Package pdftex.def Info: compare_methods.png  used on input line 97.
+(pdftex.def)             Requested size: 231.26378pt x 173.44757pt.
+
+Overfull \hbox (10.26378pt too wide) in paragraph at lines 97--98
+[][] 
+ []
+
+
+Underfull \hbox (badness 4001) in paragraph at lines 102--103
+\OT1/cmr/m/n/10 une droite avec une pente plus ^^Selev^^See. De
+ []
+
+
+Underfull \hbox (badness 1314) in paragraph at lines 102--103
+\OT1/cmr/m/n/10 leurs r^^Sesultats sont tr^^Res proches cependant la
+ []
+
+[3 <./compare_methods.png>]
+<CPU_time.png, id=22, 462.528pt x 346.896pt>
+File: CPU_time.png Graphic file (type png)
+<use CPU_time.png>
+Package pdftex.def Info: CPU_time.png  used on input line 109.
+(pdftex.def)             Requested size: 231.26378pt x 173.44757pt.
+
+Overfull \hbox (10.26378pt too wide) in paragraph at lines 109--110
+[][] 
+ []
+
+
+Underfull \hbox (badness 3815) in paragraph at lines 114--115
+[]\OT1/cmr/m/n/10 Le temps d'ex^^Secution CPU correspond au
+ []
+
+
+Underfull \hbox (badness 7081) in paragraph at lines 122--123
+[]\OT1/cmr/m/n/10 Au cours de ce projet, nous avons pu
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
+\OT1/cmr/m/n/10 exp^^Serimenter diff^^Serentes strat^^Segies, chacune
+ []
+
+
+Underfull \hbox (badness 5652) in paragraph at lines 122--123
+\OT1/cmr/m/n/10 optimal semble d^^Sependre de l'environnement
+ []
+
+
+Underfull \hbox (badness 2173) in paragraph at lines 122--123
+\OT1/cmr/m/n/10 dans lequel celle-ci va ^etre utilis^^Se. Pour des
+ []
+
+[4 <./CPU_time.png>] (./rapport.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 2724 strings out of 494587
+ 39256 string characters out of 6177759
+ 112262 words of memory out of 5000000
+ 6341 multiletter control sequences out of 15000+600000
+ 8808 words of font info for 31 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 41i,8n,31p,883b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmss10.pfb>
+Output written on rapport.pdf (4 pages, 161664 bytes).
+PDF statistics:
+ 50 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+
