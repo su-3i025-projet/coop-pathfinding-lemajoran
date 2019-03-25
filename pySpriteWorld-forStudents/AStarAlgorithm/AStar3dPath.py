@@ -63,10 +63,6 @@ class AStar3dPath(assp.AStarSimplePath):
                 random valid move
         """
         row, col = coord
-        # current position is valid for the next step
-        if (coord, time) not in AStar3dPath.reservation and\
-        (coord, time-1) not in AStar3dPath.reservation:
-            return coord
         # search valid coordinates among the neighbors
         for r, c in AStar3dPath.NEIGHBORS:
             neighbor = row+r, col+c
@@ -80,6 +76,7 @@ class AStar3dPath(assp.AStarSimplePath):
              AStar3dPath.outside_the_map(20, neighbor):
                 continue
             return neighbor
+        return coord
 
     @classmethod
     def remove_elt_from_dict(cls, player):

@@ -45,7 +45,7 @@ def init(_boardname=None):
     game = Game('Cartes/' + name + '.json', SpriteBuilder)
     game.O = Ontology(True, 'SpriteSheet-32x32/tiny_spritesheet_ontology.csv')
     game.populate_sprite_names(game.O)
-    game.fps = 200  # frames per second
+    game.fps = 5  # frames per second
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
@@ -113,7 +113,7 @@ def main():
 
     step = 0
 
-    while step < 1000:#not Tools.finished(score, 100):
+    while not Tools.finished(score, 20):
 
         for j in range(nbPlayers):
 
@@ -157,7 +157,7 @@ def main():
                 score[i] += 1
 
                 # create new random coordinates for the new potion inside the map
-                pot_x, pot_y = Tools.random_potion(o, wallStates, 10, posPlayers)
+                pot_x, pot_y = Tools.random_potion(o, wallStates, map_size, posPlayers)
 
                 # update coordinate of the potion
                 goalStates[i] = (pot_x, pot_y)
@@ -173,17 +173,24 @@ def main():
                 #CoopPath.put_path_in_group(i, players_path, grouped_path)
                 players_step[i] = 0
 
+            # reorganize the groups
+            grouped_path = CoopPath.reorganize_groups(players_path, grouped_path)
+
             # players of other group as obstacles are considered as obstacles
             obstacles = [posPlayers[i] for i in range(nbPlayers)\
              if i not in grouped_path[0]]
 
+            # roue de secour
+            temp_rem = []
             # calcul new path
             for i in grouped_path[0]:
                 players_path[i] = AStarSimplePath.calcul_path(posPlayers[i],
                 goalStates[i], wallStates+obstacles, map_size)
+                if players_path[i] is False:
+                    temp_rem.append(i)
 
-            # reorganize the groups
-            grouped_path = CoopPath.reorganize_groups(players_path, grouped_path)
+            for i in temp_rem:
+                grouped_path.append([[0].pop(i)])
 
             # number of step before next wave
             iteration_before_next_wave =\
