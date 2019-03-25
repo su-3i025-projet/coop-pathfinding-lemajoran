@@ -63,7 +63,7 @@ class AStar3dPath(assp.AStarSimplePath):
                 random valid move
         """
         row, col = coord
-        # current position is valid for the next step 
+        # current position is valid for the next step
         if (coord, time) not in AStar3dPath.reservation and\
         (coord, time-1) not in AStar3dPath.reservation:
             return coord
@@ -160,7 +160,7 @@ class AStar3dPath(assp.AStarSimplePath):
                 AStar3dPath.reservation[(best_node, time)] != player:
                 # make random move
                 data = [AStar3dPath.random_move(start, player,
-                 time, obstacles)]
+                 time, wallStates)]
             # stay on the current pos
             else: data = [best_node]
             AStar3dPath.reservation[(data[0], time)] = player

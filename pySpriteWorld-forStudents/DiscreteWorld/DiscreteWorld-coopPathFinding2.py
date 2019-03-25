@@ -45,7 +45,7 @@ def init(_boardname=None):
     game = Game('Cartes/' + name + '.json', SpriteBuilder)
     game.O = Ontology(True, 'SpriteSheet-32x32/tiny_spritesheet_ontology.csv')
     game.populate_sprite_names(game.O)
-    game.fps = 500  # frames per second
+    game.fps = 200  # frames per second
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
@@ -113,7 +113,7 @@ def main():
 
     step = 0
 
-    while not Tools.finished(score, 100):
+    while step < 1000:#not Tools.finished(score, 100):
 
         for j in range(nbPlayers):
 
@@ -157,7 +157,7 @@ def main():
                 score[i] += 1
 
                 # create new random coordinates for the new potion inside the map
-                pot_x, pot_y = Tools.random_potion(o, wallStates, map_size, posPlayers)
+                pot_x, pot_y = Tools.random_potion(o, wallStates, 10, posPlayers)
 
                 # update coordinate of the potion
                 goalStates[i] = (pot_x, pot_y)

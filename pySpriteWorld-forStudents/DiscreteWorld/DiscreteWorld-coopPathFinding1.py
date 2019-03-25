@@ -117,7 +117,7 @@ def main():
 
     step = 0
 
-    while not Tools.finished(score, 1000):
+    while step < 1000:#not Tools.finished(score, 1000):
 
         again = False
         # detect collision
@@ -146,9 +146,9 @@ def main():
 
                 # if it already has the number of potion
                 # it does nothing
-                if score[j] > 999:
-                    players_step[j] -= 1
-                    continue
+                # if score[j] > 999:
+                #     players_step[j] -= 1
+                #     continue
 
                 # take the potion
                 o = players[j].ramasse(game.layers)

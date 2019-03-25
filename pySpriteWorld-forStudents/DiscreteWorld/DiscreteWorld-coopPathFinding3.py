@@ -117,7 +117,7 @@ def main():
 
     winner = False
 
-    while not Tools.finished(score, 1000):
+    while not Tools.finished(score, 150):
 
         for j in range(nbPlayers):
 
@@ -135,7 +135,7 @@ def main():
             if posPlayers[j] == goalStates[j]:
 
                 # end of the game
-                if score[j] > 999:
+                if score[j] > 149:
                     # players_path[j] = as3d.pause(start, j, time, wallStates)
                     start = posPlayers[j]
                     players_path[j] =\
