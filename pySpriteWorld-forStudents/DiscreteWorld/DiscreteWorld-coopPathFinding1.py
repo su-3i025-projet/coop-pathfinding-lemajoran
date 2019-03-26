@@ -44,7 +44,7 @@ def init(_boardname=None):
     game = Game('Cartes/' + name + '.json', SpriteBuilder)
     game.O = Ontology(True, 'SpriteSheet-32x32/tiny_spritesheet_ontology.csv')
     game.populate_sprite_names(game.O)
-    game.fps = 200 # frames per second
+    game.fps = 5 # frames per second
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
@@ -86,7 +86,8 @@ def main():
     #-- Init Potion's position random --#
 
     for o in game.layers['ramassable']:
-        x, y = Tools.random_potion(o, wallStates, map_size, posPlayers)
+        x, y = Tools.random_potion(o, wallStates, map_size,
+         posPlayers, game.layers['ramassable'])
         game.layers['ramassable'].add(o)
         goalStates.append((x, y))
 
@@ -117,7 +118,7 @@ def main():
 
     step = 0
 
-    while step < 1000:#not Tools.finished(score, 1000):
+    while not Tools.finished(score, 1):
 
         again = False
         # detect collision
@@ -144,12 +145,6 @@ def main():
             # player reach the goal
             if posPlayers[j] == goalStates[j]:
 
-                # if it already has the number of potion
-                # it does nothing
-                # if score[j] > 999:
-                #     players_step[j] -= 1
-                #     continue
-
                 # take the potion
                 o = players[j].ramasse(game.layers)
                 print("Objet trouvé par le joueur ", j)
@@ -158,11 +153,18 @@ def main():
                 score[j] += 1
 
                 # create new random coordinates for the new potion inside the map
-                pot_x, pot_y = Tools.random_potion(o, wallStates, map_size, posPlayers)
+                pot_x, pot_y = Tools.random_potion(o, wallStates, map_size,
+                 posPlayers, game.layers['ramassable'])
 
                 # update coordinate of the potion
                 goalStates[j] = (pot_x, pot_y)
                 game.layers['ramassable'].add(o)
+
+                # if it already has the number of potion
+                # it does nothing
+                if score[j] >= 1:
+                    players_step[j] -= 1
+                    continue
 
                 #-------- New Path Creation --------#
 
@@ -172,6 +174,7 @@ def main():
                 players_path[j] = assp.calcul_path(start, goal, wallStates,
                  map_size)
                 players_step[j] = 0
+
                 print(score)
 
             # player reach the end of its path but its not the goal yet

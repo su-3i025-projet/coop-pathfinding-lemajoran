@@ -45,7 +45,7 @@ def init(_boardname=None):
     game = Game('Cartes/' + name + '.json', SpriteBuilder)
     game.O = Ontology(True, 'SpriteSheet-32x32/tiny_spritesheet_ontology.csv')
     game.populate_sprite_names(game.O)
-    game.fps = 200  # frames per second
+    game.fps = 5  # frames per second
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
@@ -85,7 +85,8 @@ def main():
     #-- Init Potion's position random --#
 
     for o in game.layers['ramassable']:
-        x, y = Tools.random_potion(o, wallStates, map_size, posPlayers)
+        x, y = Tools.random_potion(o, wallStates, map_size,
+        posPlayers, game.layers['ramassable'])
         game.layers['ramassable'].add(o)
         goalStates.append((x, y))
 
@@ -107,6 +108,23 @@ def main():
     #-----------------------------------#
 
     grouped_path = CoopPath.organize_groups(players_path)
+
+    for i in grouped_path[0]:
+        # players of other group as obstacles are considered as obstacles
+        obstacles = [posPlayers[i] for i in range(nbPlayers)\
+         if i not in grouped_path[0]]
+
+        # roue de secour
+        temp_rem = []
+        # calcul new path
+        for i in grouped_path[0]:
+            players_path[i] = AStarSimplePath.calcul_path(posPlayers[i],
+            goalStates[i], wallStates+obstacles, map_size)
+            if players_path[i] is False:
+                temp_rem.append(grouped_path[0].index(i))
+
+    for i in temp_rem:
+        grouped_path.append([grouped_path[0].pop(i)])
 
     iteration_before_next_wave =\
     CoopPath.number_of_move_before_next_group(players_path, grouped_path)
@@ -157,7 +175,8 @@ def main():
                 score[i] += 1
 
                 # create new random coordinates for the new potion inside the map
-                pot_x, pot_y = Tools.random_potion(o, wallStates, map_size, posPlayers)
+                pot_x, pot_y = Tools.random_potion(o, wallStates, map_size,
+                 posPlayers, game.layers['ramassable'])
 
                 # update coordinate of the potion
                 goalStates[i] = (pot_x, pot_y)

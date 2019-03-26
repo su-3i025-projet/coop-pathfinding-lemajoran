@@ -46,7 +46,7 @@ def init(_boardname=None):
     game = Game('Cartes/' + name + '.json', SpriteBuilder)
     game.O = Ontology(True, 'SpriteSheet-32x32/tiny_spritesheet_ontology.csv')
     game.populate_sprite_names(game.O)
-    game.fps = 200   # frames per second
+    game.fps = 5   # frames per second
     game.mainiteration()
     game.mask.allow_overlaping_players = True
     #player = game.player
@@ -89,7 +89,8 @@ def main():
     #-- Init Potion's position random --#
 
     for o in game.layers['ramassable']:
-        x, y = Tools.random_potion(o, wallStates, map_size, posPlayers)
+        x, y = Tools.random_potion(o, wallStates, map_size,
+         posPlayers, game.layers['ramassable'])
         game.layers['ramassable'].add(o)
         goalStates.append((x, y))
     game.mainiteration()
@@ -117,7 +118,7 @@ def main():
 
     winner = False
 
-    while not Tools.finished(score, 150):
+    while not Tools.finished(score, 1):
 
         for j in range(nbPlayers):
 
@@ -135,7 +136,7 @@ def main():
             if posPlayers[j] == goalStates[j]:
 
                 # end of the game
-                if score[j] > 149:
+                if score[j] >= 1:
                     # players_path[j] = as3d.pause(start, j, time, wallStates)
                     start = posPlayers[j]
                     players_path[j] =\
@@ -152,7 +153,7 @@ def main():
 
                 # create new random coordinates for the new potion inside the map
                 pot_x, pot_y = Tools.random_potion(o, wallStates, map_size,
-                 posPlayers)
+                 posPlayers, game.layers['ramassable'])
 
                 # update coordinate of the potion
                 goalStates[j] = (pot_x, pot_y)
